@@ -19,7 +19,7 @@ namespace Casion
         int BetCorner(int bet, int placementOfBet, int randomNumber); //Sats på 4 numre på én gang (1-2-4-5, 2-3-5-6, ect..)
         int BetFive(int bet, int placementOfBet, int randomNumber); //Sats på 5 numre på én gang (KUN, 0-00-1-2-3)
         int BetLine(int bet, int placementOfBet, int randomNumber); //Sats på 6 numre på én gang (1-2-3-4-5-6, 4-5-6-7-8-9, ect..)3
-        bool IsNumberZero(int bet, int randomNumber); //Tjekker om randomNumber er 0/00
+        bool IsNumberZero(int randomNumber); //Tjekker om randomNumber er 0/00
         int BetCheck(int bet, int payoutNumber, bool winLoseBool); //Udregner hvor meget spilleren skal have ind, på sin balance
     }
 }

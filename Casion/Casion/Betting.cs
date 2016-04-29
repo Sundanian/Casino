@@ -8,13 +8,19 @@ namespace Casion
 {
     class Betting : IBetting
     {
-        public int playerMonies;
-        public int randomNumber;
-        public int playerBalance;
-        public int payoutVariable;
-        public bool winLose;
-        public bool tableWin;
+        public int randomNumber; //Er Roulettens Random genererede tal
+        public int playerBalance; //Er en GET for playerens Balance(penge)
+        public int payoutVariable; //Bliver brugt til at definere hvor meget hver type BET, giver tilbage
+        public bool winLose; //Bliver brugt i BetCheck()
 
+        /// <summary>
+        /// Sats på 'ét' nummer! Kan også være 0 eller 00!
+        /// Vinder 35*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetStraigthUp(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 35;
@@ -30,11 +36,20 @@ namespace Casion
             }
             return BetCheck(bet, payoutVariable, winLose);
         }
-
+       
+        /// <summary>
+        /// Sats på 'Lige' eller 'Ulige'!
+        /// Taber på 0 eller 00
+        /// Vinder 1*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetEvenOrOdd(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 1;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 int guess = placementOfBet % 2;
                 int rNumber = randomNumber % 2;
@@ -71,10 +86,19 @@ namespace Casion
             }
         }
 
+        /// <summary>
+        /// Sats på 'Lav' eller 'Høj'!
+        /// Taber på 0 eller 00
+        /// Vinder 1*1 bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetLowOrHigh(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 1;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 bool guess = false;
                 bool rNumber = false;
@@ -115,10 +139,19 @@ namespace Casion
             }
         }
 
+        /// <summary>
+        /// Sats på 'Rød' eller 'Sort'!
+        /// Taber på 'Grøn' og 0 eller 00
+        /// Vinder 1*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetRedOrBlack(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 1;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 bool guess = false;
                 bool rNumber = false;
@@ -164,10 +197,19 @@ namespace Casion
             }
         }
 
+        /// <summary>
+        /// Sats på en af 3 mulige valg. 1-12, 13-24 eller 25-36!
+        /// Taber på 0 eller 00
+        /// Vinder 2*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetDozen(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 2;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 bool guess = false;
                 bool rNumber = false;
@@ -213,10 +255,19 @@ namespace Casion
             }
         }
 
+        /// <summary>
+        /// Sats på en af 3 mulige valg. Kolonne 1, 2 eller 3
+        /// Taber på 0 eller 00
+        /// Vinder 2*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetColumn(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 2;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 int guess = placementOfBet % 3;
                 int rNumber = randomNumber % 3;
@@ -261,53 +312,147 @@ namespace Casion
             }
         }
 
-        public int BetSplit(int bet, int placementOfBet, int randomNumber)
+        /// <summary>
+        /// Sats på to sammenhængende numre! 1 og 2, eller 2 og 3, eller 1 og 4, ect.!
+        /// Taber på 0 eller 00
+        /// Vinder 17*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
+        public int BetSplit(int bet, int placementOfBet, int randomNumber) //Er ikker færdig endnu!! Mangler flere rows, 1 og 4, 2 og 3, 2 og 5, osv osv..
         {
             payoutVariable = 17;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 int guess = 0;
                 int rowCount = 0;
                 int rowRandom = 0;
 
                 List<Array> rows = new List<Array>();
-                int[] firstRow= new int[] { 1, 2 };
-                int[] secondRow = new int[] { 3, 4 };
-                int[] thirdRow = new int[] {5, 6 };
-                int[] fourthRow = new int[] { 7, 8 };
-                int[] fifthRow = new int[] { 9, 10 };
-                int[] sixthRow = new int[] { 11, 12 };
-                int[] seventhRow = new int[] { 13, 14 };
-                int[] eighthRow = new int[] { 15, 16 };
-                int[] ninethRow = new int[] { 17, 18 };
-                int[] tenthRow = new int[] { 19, 20 };
-                int[] eleventhRow = new int[] { 21, 22 };
-                int[] twelvethRow = new int[] { 23, 24 };
-                int[] thirdteenthRow = new int[] { 25, 26 };
-                int[] fourteenthRow = new int[] { 27, 28 };
-                int[] fifteenthRow = new int[] { 29, 30 };
-                int[] sixteenthRow = new int[] { 31, 32 };
-                int[] seventeenthRow = new int[] { 33, 34 };
-                int[] eightteenthRow = new int[] { 35, 36 };
+                #region Arrays
+                int[] aRow = new int[] { 1, 2 };
+                int[] bRow = new int[] { 1, 4 };
+                int[] cRow = new int[] { 2, 3 };
+                int[] dRow = new int[] { 2, 5 };
+                int[] eRow = new int[] { 3, 6 };
+                int[] fRow = new int[] { 4, 5 };
+                int[] gRow = new int[] { 4, 7 };
+                int[] hRow = new int[] { 5, 6 };
+                int[] iRow = new int[] { 5, 8 };
+                int[] jRow = new int[] { 6, 9 };
+                int[] kRow = new int[] { 7, 8 };
+                int[] lRow = new int[] { 7, 10 };
+                int[] mRow = new int[] { 8, 9 };
+                int[] nRow = new int[] { 8, 11 };
+                int[] oRow = new int[] { 9, 12 };
+                int[] pRow = new int[] { 10, 11 };
+                int[] qRow = new int[] { 10, 13 };
+                int[] rRow = new int[] { 11, 12 };
+                int[] sRow = new int[] { 11, 14 };
+                int[] tRow = new int[] { 12, 15 };
+                int[] uRow = new int[] { 13, 14 };
+                int[] vRow = new int[] { 13, 16 };
+                int[] wRow = new int[] { 14, 15 };
+                int[] xRow = new int[] { 14, 17 };
+                int[] yRow = new int[] { 15, 18 };
+                int[] zRow = new int[] { 16, 17 };
 
-                rows.Add(firstRow);
-                rows.Add(secondRow);
-                rows.Add(thirdRow);
-                rows.Add(fourthRow);
-                rows.Add(fifthRow);
-                rows.Add(sixthRow);
-                rows.Add(seventhRow);
-                rows.Add(eighthRow);
-                rows.Add(ninethRow);
-                rows.Add(tenthRow);
-                rows.Add(eleventhRow);
-                rows.Add(twelvethRow);
-                rows.Add(thirdteenthRow);
-                rows.Add(fourteenthRow);
-                rows.Add(fifteenthRow);
-                rows.Add(sixteenthRow);
-                rows.Add(seventeenthRow);
-                rows.Add(eightteenthRow);
+                int[] aaRow = new int[] { 16, 19 };
+                int[] abRow = new int[] { 17, 18 };
+                int[] acRow = new int[] { 17, 20 };
+                int[] adRow = new int[] { 18, 21 };
+                int[] aeRow = new int[] { 19, 20 };
+                int[] afRow = new int[] { 19, 22 };
+                int[] agRow = new int[] { 20, 21 };
+                int[] ahRow = new int[] { 20, 23 };
+                int[] aiRow = new int[] { 21, 24 };
+                int[] ajRow = new int[] { 22, 23 };
+                int[] akRow = new int[] { 22, 25 };
+                int[] alRow = new int[] { 23, 24 };
+                int[] amRow = new int[] { 23, 26 };
+                int[] anRow = new int[] { 24, 27 };
+                int[] aoRow = new int[] { 25, 26 };
+                int[] apRow = new int[] { 25, 28 };
+                int[] aqRow = new int[] { 26, 27 };
+                int[] arRow = new int[] { 26, 29 };
+                int[] asRow = new int[] { 27, 30 };
+                int[] atRow = new int[] { 28, 29 };
+                int[] auRow = new int[] { 28, 31 };
+                int[] avRow = new int[] { 29, 30 };
+                int[] awRow = new int[] { 29, 32 };
+                int[] axRow = new int[] { 30, 33 };
+                int[] ayRow = new int[] { 31, 32 };
+                int[] azRow = new int[] { 31, 34 };
+
+                int[] baRow = new int[] { 32, 33 };
+                int[] bbRow = new int[] { 32, 35 };
+                int[] bcRow = new int[] { 33, 36 };
+                int[] bdRow = new int[] { 34, 35 };
+                int[] beRow = new int[] { 35, 36 };
+                #endregion
+                #region add Arrays to list 'rows'
+                rows.Add(aRow);
+                rows.Add(bRow);
+                rows.Add(cRow);
+                rows.Add(dRow);
+                rows.Add(eRow);
+                rows.Add(fRow);
+                rows.Add(gRow);
+                rows.Add(hRow);
+                rows.Add(iRow);
+                rows.Add(jRow);
+                rows.Add(kRow);
+                rows.Add(lRow);
+                rows.Add(mRow);
+                rows.Add(nRow);
+                rows.Add(oRow);
+                rows.Add(pRow);
+                rows.Add(qRow);
+                rows.Add(rRow);
+                rows.Add(sRow);
+                rows.Add(tRow);
+                rows.Add(uRow);
+                rows.Add(vRow);
+                rows.Add(wRow);
+                rows.Add(xRow);
+                rows.Add(yRow);
+                rows.Add(zRow);
+
+                rows.Add(aaRow);
+                rows.Add(abRow);
+                rows.Add(acRow);
+                rows.Add(adRow);
+                rows.Add(aeRow);
+                rows.Add(afRow);
+                rows.Add(agRow);
+                rows.Add(ahRow);
+                rows.Add(aiRow);
+                rows.Add(ajRow);
+                rows.Add(akRow);
+                rows.Add(alRow);
+                rows.Add(amRow);
+                rows.Add(anRow);
+                rows.Add(aoRow);
+                rows.Add(apRow);
+                rows.Add(aqRow);
+                rows.Add(arRow);
+                rows.Add(asRow);
+                rows.Add(atRow);
+                rows.Add(auRow);
+                rows.Add(avRow);
+                rows.Add(awRow);
+                rows.Add(axRow);
+                rows.Add(ayRow);
+                rows.Add(azRow);
+
+                rows.Add(baRow);
+                rows.Add(bbRow);
+                rows.Add(bcRow);
+                rows.Add(bdRow);
+                rows.Add(beRow);
+                #endregion
 
                 foreach (Array tableRows in rows)
                 {
@@ -352,16 +497,26 @@ namespace Casion
             }
         }
 
+        /// <summary>
+        /// Stas på én række af tre numre! 1-2-3 eller 4-5-6, ect.
+        /// Taber på 0 eller 00
+        /// Vinder 11*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetStreet(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 11;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 int guess = 0;
                 int rowCount = 0;
                 int rowRandom = 0;
 
                 List<Array> rows = new List<Array>();
+                #region Arrays
                 int[] firstRow = new int[] { 1, 2, 3 };
                 int[] secondRow = new int[] { 4, 5, 6 };
                 int[] thirdRow = new int[] { 7, 8, 9 };
@@ -374,7 +529,8 @@ namespace Casion
                 int[] tenthRow = new int[] { 28, 29, 30 };
                 int[] eleventhRow = new int[] { 31, 32, 33 };
                 int[] twelvethRow = new int[] { 34, 35, 36 };
-
+                #endregion
+                #region add arrays to list 'rows'
                 rows.Add(firstRow);
                 rows.Add(secondRow);
                 rows.Add(thirdRow);
@@ -387,6 +543,7 @@ namespace Casion
                 rows.Add(tenthRow);
                 rows.Add(eleventhRow);
                 rows.Add(twelvethRow);
+                #endregion
 
                 foreach (Array tableRows in rows)
                 {
@@ -431,16 +588,26 @@ namespace Casion
             }
         }
 
+        /// <summary>
+        /// Sats på et 'Corner' af fire sammenhængende tal! 1-2-4-5 eller 2-3-5-6, ect.
+        /// Taber på 0 eller 00
+        /// Vinder 8*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetCorner(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 8;
-            if (IsNumberZero(bet, randomNumber))
+            if (IsNumberZero(randomNumber))
             {
                 int guess = 0;
                 int rowCount = 0;
                 int rowRandom = 0;
                 
                 List<Array> corners = new List<Array>();
+                #region Arrays
                 int[] firstCorner = new int[] { 1, 2, 4, 5 };
                 int[] secondCorner = new int[] { 2, 3, 5, 6 };
                 int[] thirdCorner = new int[] { 4, 5, 7, 8 };
@@ -463,7 +630,8 @@ namespace Casion
                 int[] twentyCorner = new int[] { 29, 30, 32, 33 };
                 int[] twentyOneCorner = new int[] { 31, 32, 34, 35 };
                 int[] twentyTwoCorner = new int[] { 32, 33, 35, 36 };
-
+                #endregion
+                #region Add arrays to list 'corners'
                 corners.Add(firstCorner);
                 corners.Add(secondCorner);
                 corners.Add(thirdCorner);
@@ -486,6 +654,7 @@ namespace Casion
                 corners.Add(twentyCorner);
                 corners.Add(twentyOneCorner);
                 corners.Add(twentyTwoCorner);
+                #endregion
 
                 //Leder efter det nummer man satsede på, og går igennem listen med de forskellige mulige corners, som indeholder hver deres sæt af tal
                 foreach (Array tableCorner in corners)
@@ -531,17 +700,42 @@ namespace Casion
             }
         }
 
+        /// <summary>
+        /// Sats på 'Toppen af pladen, bestående af 0, 00, 1, 2 og 3!
+        /// Taber på andre numre
+        /// Vinder 6*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetFive(int bet, int placementOfBet, int randomNumber)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Sats på 6 sammenhængende numre (2 sammenhængende rækker)! 1-2-3 og 4-5-6 eller 4-5-6 og 7-8-9, ect.
+        /// Taber på 0 eller 00
+        /// Vinder 5*bet + bet igen
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren satser</param>
+        /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetLine(int bet, int placementOfBet, int randomNumber)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsNumberZero(int bet, int randomNumber)
+        /// <summary>
+        /// Tjekker på om Roulettens tal er 0 eller 37(00), og retunere en bool, som bestemmer om den skal gå ind i bet-funktionens udregning eller springe den over. 
+        /// </summary>
+        /// <param name="randomNumber">Roulettens Tal</param>
+        /// <returns>En bool, som bestemmer om bettet skal fortsætte, baseret på om Roulettens RANDOM tal er 0 eller 37(00)
+        /// True, den fortsætter
+        /// False, den kalder Betcheck(bet, payout, FALSE)</returns>
+        public bool IsNumberZero(int randomNumber)
         {
             if (randomNumber == 0 || randomNumber == 37)
             {
@@ -552,6 +746,15 @@ namespace Casion
             return true;
         }
 
+        /// <summary>
+        /// Bliver kaldt i slutningen af ethvert bet.
+        /// Laver udregningen for et vundet eller tabt spil.
+        /// </summary>
+        /// <param name="bet">Hvor meget spilleren har satset</param>
+        /// <param name="payout">Bestemmer hvor mange gange spilleren skal have sit sats igen</param>
+        /// <param name="winLoseBool">En bool der bliver brugt i de forskellige bets, som afgiver + / - </param>
+        /// <returns>En 'int', som bliver beregnet udfra om det er et vundet eller tabt spil.
+        /// Tager spillerens penge(balance) og tilføjer eller trækker fra og returnere den nye balance</returns>
         public int BetCheck(int bet, int payout, bool winLoseBool)
         {
             if (winLoseBool)
