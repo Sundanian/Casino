@@ -321,7 +321,7 @@ namespace Casion
         /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
         /// <param name="randomNumber">Roulettens Tal</param>
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
-        public int BetSplit(int bet, int placementOfBet, int randomNumber) //Er ikker færdig endnu!! Mangler flere rows, 1 og 4, 2 og 3, 2 og 5, osv osv..
+        public int BetSplit(int bet, int placementOfBet, int randomNumber)
         {
             payoutVariable = 17;
             if (IsNumberZero(randomNumber))
@@ -711,7 +711,60 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetFive(int bet, int placementOfBet, int randomNumber)
         {
-            throw new NotImplementedException();
+            payoutVariable = 6;
+            if (IsNumberZero(randomNumber))
+            {
+                bool guess = false;
+                bool rowRandom = false;
+
+                List<Array> five = new List<Array>();
+                #region Arrays
+                int[] firstRow = new int[] { 0, 1, 2, 3, 37 }; //37 = 00
+
+                #endregion
+                #region add arrays to list 'rows'
+                five.Add(firstRow);
+                #endregion
+
+                foreach (Array tableRows in five)
+                {
+                    foreach (int number in tableRows)
+                    {
+                        if (placementOfBet == number)
+                        {
+                            guess = true;
+                        }
+                    }
+                }
+
+                foreach (Array tableRows in five)
+                {
+                    foreach (int number in tableRows)
+                    {
+                        if (randomNumber == number)
+                        {
+                            rowRandom = true;
+                        }
+                    }
+                }
+
+                Console.WriteLine("Your bettet on one of 'The Five': {0}", placementOfBet);
+                Console.WriteLine("The ball landed on: {0}", randomNumber);
+
+                if (rowRandom == guess && rowRandom == true)
+                {
+                    winLose = true;
+                }
+                else
+                {
+                    winLose = false;
+                }
+                return BetCheck(bet, payoutVariable, winLose);
+            }
+            else
+            {
+                return BetCheck(bet, payoutVariable, false);
+            }
         }
 
         /// <summary>
@@ -725,7 +778,82 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetLine(int bet, int placementOfBet, int randomNumber)
         {
-            throw new NotImplementedException();
+            payoutVariable = 5;
+            if (IsNumberZero(randomNumber))
+            {
+                int guess = 0;
+                int rowCount = 0;
+                int rowRandom = 0;
+
+                List<Array> rows = new List<Array>();
+                #region Arrays
+                int[] firstRow = new int[] { 1, 2, 3, 4, 5, 6 };
+                int[] secondRow = new int[] { 4, 5, 6, 7, 8, 9 };
+                int[] thirdRow = new int[] { 7, 8, 9, 10, 11, 12 };
+                int[] fourthRow = new int[] { 10, 11, 12, 13, 14, 15 };
+                int[] fifthRow = new int[] { 13, 14, 15, 16, 17, 18 };
+                int[] sixthRow = new int[] { 16, 17, 18, 19, 20, 21 };
+                int[] seventhRow = new int[] { 19, 20, 21, 22, 23, 24 };
+                int[] eighthRow = new int[] { 22, 23, 24, 25, 26, 27 };
+                int[] ninethRow = new int[] { 25, 26, 27, 28, 29, 30 };
+                int[] tenthRow = new int[] { 28, 29, 30, 31, 32, 33 };
+                int[] eleventhRow = new int[] { 31, 32, 33, 34, 35, 36 };
+                #endregion
+                #region add arrays to list 'rows'
+                rows.Add(firstRow);
+                rows.Add(secondRow);
+                rows.Add(thirdRow);
+                rows.Add(fourthRow);
+                rows.Add(fifthRow);
+                rows.Add(sixthRow);
+                rows.Add(seventhRow);
+                rows.Add(eighthRow);
+                rows.Add(ninethRow);
+                rows.Add(tenthRow);
+                rows.Add(eleventhRow);
+                #endregion
+
+                foreach (Array tableRows in rows)
+                {
+                    foreach (int numberInRow in tableRows)
+                    {
+                        if (placementOfBet == numberInRow)
+                        {
+                            guess = rowCount;
+                        }
+                    }
+                    rowCount++;
+                }
+
+                foreach (Array tableRows in rows)
+                {
+                    foreach (int numberInRow in tableRows)
+                    {
+                        if (placementOfBet == numberInRow)
+                        {
+                            rowRandom = rowCount;
+                        }
+                    }
+                    rowCount++;
+                }
+
+                Console.WriteLine("Your bettet on number: {0}, which is in row: {1}", placementOfBet, guess);
+                Console.WriteLine("The ball landed on: {0}, which is in row {1}", randomNumber, rowRandom);
+
+                if (rowRandom == guess)
+                {
+                    winLose = true;
+                }
+                else
+                {
+                    winLose = false;
+                }
+                return BetCheck(bet, payoutVariable, winLose);
+            }
+            else
+            {
+                return BetCheck(bet, payoutVariable, false);
+            }
         }
 
         /// <summary>
