@@ -11,9 +11,10 @@ try:
     cur = con.cursor()
 
     name = raw_input("Please enter your name: ")
-    cur.execute("INSERT INTO Player VALUES(NULL, '" + name + "', 500)")
+    with con:
+        cur.execute("INSERT INTO Player VALUES(NULL, '" + name + "', 500)")
 
-    cur.execute("SELECT * from Player ORDER BY Id DESC LIMIT 1") #Gets the player with the highest Id.  Lets hope its our player ;)
+        cur.execute("SELECT * from Player ORDER BY Id DESC LIMIT 1") #Gets the player with the highest Id. Lets hope its our player ;)
     sqPlayer = cur.fetchall()
     for row in sqPlayer:
         playerId = row[0]

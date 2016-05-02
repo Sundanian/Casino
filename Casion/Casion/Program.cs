@@ -23,10 +23,21 @@ namespace Casion
         /// Let the user make a new playerprofile. 
         /// </summary>
         /// <returns>The player the user created</returns>
-        public static Player NewPlayer()
+        public static Player NewUser()
         {
             dynamic scope = engine.CreateScope();
             engine.ExecuteFile("NewUser.py", scope);
+
+            return new Player(scope.GetVariable("playerId"), scope.GetVariable("playerName"), scope.GetVariable("playerMoney"));
+        }
+        /// <summary>
+        /// Lets the user select an existing playerprofile
+        /// </summary>
+        /// <returns>The player the user choose</returns>
+        public static Player SelectUser()
+        {
+            dynamic scope = engine.CreateScope();
+            engine.ExecuteFile("SelectUser.py", scope);
 
             return new Player(scope.GetVariable("playerId"), scope.GetVariable("playerName"), scope.GetVariable("playerMoney"));
         }
@@ -39,26 +50,6 @@ namespace Casion
             paths.Add(@"Lib");
             engine.SetSearchPaths(paths);
             engine.ExecuteFile("DatabaseScript.py");
-        }
-        /// <summary>
-        /// Lets the user select an existing playerprofile
-        /// </summary>
-        /// <returns>The player the user choose</returns>
-        public static Player SelectUser()
-        {
-            dynamic scope = engine.CreateScope();
-            engine.ExecuteFile("SelectUser.py", scope);
-
-            Console.WriteLine("\nSelect a save file (Write the ID number)");
-            string input = Console.ReadLine();
-
-            var User = scope.GetVariable("SelectPlayer");
-            var result = User(input);
-            int id = scope.GetVariable("playerId");
-            string name = scope.GetVariable("playerName");
-            int money = scope.GetVariable("playerMoney");
-
-            return new Player(id, name, money);
         }
         /// <summary>
         /// Clears the console and draws the roulette table on a dark green background.

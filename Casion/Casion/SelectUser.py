@@ -3,7 +3,7 @@ import sys
 
 con = None
 
-con = lite.connect('test.db')
+con = lite.connect('Users.db')
     
 cur = con.cursor()    
 
@@ -18,13 +18,12 @@ for row in rows:
     print "Save Name", row[1]
     print "Save Money", row[2]
 
-def SelectPlayer(playerinput):    
+playerinput = raw_input("Select a save file (Write the ID number)")
+  
+with con: 
     cur.execute("Select * from Player where Id = " + playerinput)
-    playersave = cur.fetchall()
-    for row in playersave:
-        global playerId
-        playerId = row[0]
-        global playerName
-        playerName = row[1]
-        global playerMoney
-        playerMoney = row[2]
+playersave = cur.fetchall()
+for row in playersave:
+    playerId = row[0]
+    playerName = row[1]
+    playerMoney = row[2]
