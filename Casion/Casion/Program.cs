@@ -40,14 +40,13 @@ namespace Casion
             engine.SetSearchPaths(paths);
             engine.ExecuteFile("DatabaseScript.py");
         }
-
-        static void SelectUser()
+        /// <summary>
+        /// Lets the user select an existing playerprofile
+        /// </summary>
+        /// <returns>The player the user choose</returns>
+        public static Player SelectUser()
         {
-            var engine = Python.CreateEngine();
-            var paths = engine.GetSearchPaths();
-            var scope = engine.CreateScope();
-            paths.Add(@"Lib");
-            engine.SetSearchPaths(paths);
+            dynamic scope = engine.CreateScope();
             engine.ExecuteFile("SelectUser.py", scope);
 
             Console.WriteLine("\nSelect a save file (Write the ID number)");
@@ -58,8 +57,9 @@ namespace Casion
             int id = scope.GetVariable("playerId");
             string name = scope.GetVariable("playerName");
             int money = scope.GetVariable("playerMoney");
-        }
 
+            return new Player(id, name, money);
+        }
         /// <summary>
         /// Clears the console and draws the roulette table on a dark green background.
         /// </summary>
