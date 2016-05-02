@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,14 @@ namespace Casion
     {
         static void Main(string[] args)
         {
+            //ScriptEngine se = Python.CreateEngine();
+            //se.ExecuteFile("Casion_Python.py");
             DrawRouletteTable();
+            var engine = Python.CreateEngine();
+            var paths = engine.GetSearchPaths();
+            paths.Add(@"Lib");
+            engine.SetSearchPaths(paths);
+            engine.ExecuteFile("Casion_Python.py");
         }
 
         /// <summary>
