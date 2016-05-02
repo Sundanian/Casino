@@ -17,8 +17,26 @@ namespace Casion
             engine = Python.CreateEngine();
             CreateDatabase();
             DrawRouletteTable();
+            StartGame();
         }
+        public static void StartGame()
+        {
+            Console.WriteLine("Enter 'n' for new game og 'l' to load an existing game");
+            string input = Console.ReadLine().ToUpper();
+            switch (input)
+            {
+                case "N":
+                    NewUser();
+                    break;
+                case "L":
+                    SelectUser();
+                    break;
+                default:
+                    Console.WriteLine("I dont understand your input...");
+                    break;
+            }
 
+        }
         /// <summary>
         /// Let the user make a new playerprofile. 
         /// </summary>
