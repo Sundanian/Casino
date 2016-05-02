@@ -594,6 +594,9 @@
     <None Include="Lib\__future__.py" />
     <None Include="Lib\__phello__.foo.py" />
     <None Include="packages.config" />
+    <None Include="SelectUser.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\site-packages\README.txt" />

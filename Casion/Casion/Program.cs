@@ -20,6 +20,26 @@ namespace Casion
             paths.Add(@"Lib");
             engine.SetSearchPaths(paths);
             engine.ExecuteFile("Casion_Python.py");
+            SelectUser();
+        }
+
+        static void SelectUser()
+        {
+            var engine = Python.CreateEngine();
+            var paths = engine.GetSearchPaths();
+            var scope = engine.CreateScope();
+            paths.Add(@"Lib");
+            engine.SetSearchPaths(paths);
+            engine.ExecuteFile("SelectUser.py", scope);
+
+            Console.WriteLine("\nSelect a save file (Write the ID number)");
+            string input = Console.ReadLine();
+
+            var User = scope.GetVariable("SelectPlayer");
+            var result = User(input);
+            int id = scope.GetVariable("playerId");
+            string name = scope.GetVariable("playerName");
+            int money = scope.GetVariable("playerMoney");
         }
 
         /// <summary>
