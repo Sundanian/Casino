@@ -5,18 +5,11 @@ import sys
 con = None
 
 try:
-    con = lite.connect('test.db')
+    con = lite.connect('Users.db')
     
     cur = con.cursor()    
 
-    cur.execute("CREATE TABLE if not exists Player(Id INTEGER PRIMARY KEY, Name TEXT, Money int)")
-    cur.execute("INSERT INTO Player VALUES(NULL, 'Morten', 500)")
-    
-    with con:
-        cur.execute("Select * from Player")
-        rows=cur.fetchall()
-        for row in rows:
-            print(row)   
+    cur.execute("CREATE TABLE if not exists Player(Id INTEGER PRIMARY KEY, Name TEXT, Money int)") 
              
 except lite.Error, e:
     

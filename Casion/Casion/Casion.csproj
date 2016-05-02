@@ -75,12 +75,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Casion_Python.py">
+    <None Include="DatabaseScript.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Lib\abc.py" />
@@ -593,6 +594,9 @@
     <None Include="Lib\_weakrefset.py" />
     <None Include="Lib\__future__.py" />
     <None Include="Lib\__phello__.foo.py" />
+    <None Include="NewUser.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

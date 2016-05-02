@@ -10,18 +10,36 @@ namespace Casion
 {
     class Program
     {
+        static ScriptEngine engine;
+
         static void Main(string[] args)
         {
-            //ScriptEngine se = Python.CreateEngine();
-            //se.ExecuteFile("Casion_Python.py");
+            engine = Python.CreateEngine();
+            CreateDatabase();
             DrawRouletteTable();
-            var engine = Python.CreateEngine();
+        }
+
+        /// <summary>
+        /// Let the user make a new playerprofile. 
+        /// </summary>
+        /// <returns>The player the user created</returns>
+        public static Player NewPlayer()
+        {
+            dynamic scope = engine.CreateScope();
+            engine.ExecuteFile("NewUser.py", scope);
+
+            return new Player(scope.GetVariable("playerId"), scope.GetVariable("playerName"), scope.GetVariable("playerMoney"));
+        }
+        /// <summary>
+        /// Creates our databse by running the python script called "DatabaseScript.py".
+        /// </summary>
+        public static void CreateDatabase()
+        {
             var paths = engine.GetSearchPaths();
             paths.Add(@"Lib");
             engine.SetSearchPaths(paths);
-            engine.ExecuteFile("Casion_Python.py");
+            engine.ExecuteFile("DatabaseScript.py");
         }
-
         /// <summary>
         /// Clears the console and draws the roulette table on a dark green background.
         /// </summary>
