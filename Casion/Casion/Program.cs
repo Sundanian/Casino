@@ -10,6 +10,12 @@ namespace Casion
     {
         static void Main(string[] args)
         {
+            Roulette r = new Roulette();
+
+            r.Spin();
+
+            Console.WriteLine(r.result);
+            Console.ReadLine();
         }
     }
 }
