@@ -9,12 +9,15 @@ namespace Casion
     class Betting : IBetting
     {
         //int randomNumber = r.Spin();//Er Roulettens Random genererede tal
-        public int playerBalance; //Er en GET for playerens Balance(penge)
+        Player player;
         private int payoutVariable; //Bliver brugt til at definere hvor meget hver type BET, giver tilbage
         public bool winLose; //Bliver brugt i BetCheck()
         bool isChecked = false;
 
-        
+        public Betting(Player player)
+        {
+            this.player = player;
+        }
 
         public int PayoutVariable
         {
@@ -872,7 +875,7 @@ namespace Casion
                 int result = bet + (bet * payout);
 
                 Console.WriteLine("{0} was added to your balance", result);
-                return playerBalance += result;
+                return player.Money += result;
             }
             else
             {
@@ -881,7 +884,7 @@ namespace Casion
                 int result = bet * -1;
 
                 Console.WriteLine("{0} was subtracted from your balance", result);
-                return playerBalance += result;
+                return player.Money += result;
             }
         }
     }

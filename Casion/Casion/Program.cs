@@ -11,21 +11,52 @@ namespace Casion
     class Program
     {
         static ScriptEngine engine;
+        static Player player;
+        static Roulette roulette;
+        static Betting betting;
+
+        /*
+        TODO:
+        Tjek på om man kan lave bet.
+        Skrive switchcase.
+        Logik med gameloop.
+        */
 
         static void Main(string[] args)
         {
+            Setup();
+
+            do
+            {
+                DrawRouletteTable();
+                Console.WriteLine("Enter you bet amount:");
+                int bet = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("What bet will you make?");
+                Console.WriteLine("1: Bet Straight Up\n2: Even/Odd\n3: Low/High\n4: Red/Black\n5: Dozen\n6: Column\n7: Split\n8: Street\n9: Corner\n10: Five\n11: Line");
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        Console.WriteLine("Enter the number you bet on:");
+                        betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    default:
+                        Console.WriteLine("I don't understand you input...");
+                        break;
+                }
+                SaveGame(player);
+            } while (true);
+        }
+        /// <summary>
+        /// The important code that needs to run at startup.
+        /// </summary>
+        private static void Setup()
+        {
             engine = Python.CreateEngine();
-			CreateDatabase();
+            CreateDatabase();
             DrawRouletteTable();
-            Player player = StartGame();
-			Roulette r = new Roulette();
-            int result = r.Spin();
-
-            Betting myBet = new Betting();
-
-            //Tmp kode
-            player.Money += 100;
-            SaveGame(player);
+            player = StartGame();
+            roulette = new Roulette();
+            betting = new Betting(player);
         }
         /// <summary>
         /// Saves the game by updateing the database with the given player.
