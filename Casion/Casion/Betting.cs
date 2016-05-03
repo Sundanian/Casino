@@ -10,8 +10,22 @@ namespace Casion
     {
         public int randomNumber; //Er Roulettens Random genererede tal
         public int playerBalance; //Er en GET for playerens Balance(penge)
-        public int payoutVariable; //Bliver brugt til at definere hvor meget hver type BET, giver tilbage
+        private int payoutVariable; //Bliver brugt til at definere hvor meget hver type BET, giver tilbage
         public bool winLose; //Bliver brugt i BetCheck()
+        bool isChecked = false;
+
+        public int PayoutVariable
+        {
+            get
+            {
+                return payoutVariable;
+            }
+
+            set
+            {
+                payoutVariable = value;
+            }
+        }
 
         /// <summary>
         /// Sats på 'ét' nummer! Kan også være 0 eller 00!
@@ -23,9 +37,8 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetStraigthUp(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 35;
+            PayoutVariable = 35;
             Console.WriteLine("Your number was: {0} \nThe ball landed on: {1}", placementOfBet, randomNumber);
-            // #Pseudo Random funktion, som vælger et tal mellem 0, 00, 1-36
             if (placementOfBet == randomNumber)
             {
                 winLose = true;
@@ -34,7 +47,7 @@ namespace Casion
             {
                 winLose = false;
             }
-            return BetCheck(bet, payoutVariable, winLose);
+            return BetCheck(bet, PayoutVariable, winLose);
         }
        
         /// <summary>
@@ -48,7 +61,7 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetEvenOrOdd(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 1;
+            PayoutVariable = 1;
             if (IsNumberZero(randomNumber))
             {
                 int guess = placementOfBet % 2;
@@ -78,11 +91,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -97,7 +110,7 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetLowOrHigh(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 1;
+            PayoutVariable = 1;
             if (IsNumberZero(randomNumber))
             {
                 bool guess = false;
@@ -131,11 +144,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -150,7 +163,7 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetRedOrBlack(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 1;
+            PayoutVariable = 1;
             if (IsNumberZero(randomNumber))
             {
                 bool guess = false;
@@ -189,11 +202,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -208,32 +221,43 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetDozen(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 2;
+            PayoutVariable = 2;
             if (IsNumberZero(randomNumber))
             {
                 bool guess = false;
                 bool rNumber = false;
+                bool is12 = false;
+                bool is24 = false;
+                bool is36 = false;
                 if (placementOfBet <= 12)
                 {
                     Console.WriteLine("Your betting on a Dozen between '1-12'..");
-                    guess = false;
+                    guess = true;
+                    is12 = true;
                 }
                 if (placementOfBet >= 13 && placementOfBet <= 24)
                 {
                     Console.WriteLine("Your betting on a Dozen between '13-24'..");
                     guess = true;
+                    is24 = true;
                 }
                 if (placementOfBet >= 25 && placementOfBet <= 36)
                 {
                     Console.WriteLine("Your betting on a Dozen between '25-36'..");
                     guess = true;
+                    is36 = true;
                 }
-                if (randomNumber >= 13 && placementOfBet <= 24)
+                if (randomNumber <= 12 && is12 == true)
                 {
                     Console.WriteLine("The ball landed on: {0}..", randomNumber);
-                    rNumber = false;
+                    rNumber = true;
                 }
-                if (randomNumber >= 25 && placementOfBet <= 36)
+                if (randomNumber >= 13 && randomNumber <= 24 && is24 == true)
+                {
+                    Console.WriteLine("The ball landed on: {0}..", randomNumber);
+                    rNumber = true;
+                }
+                if (randomNumber >= 25 && randomNumber <= 36 && is36 == true)
                 {
                     Console.WriteLine("The ball landed on: {0}..", randomNumber);
                     rNumber = true;
@@ -247,11 +271,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -266,7 +290,7 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetColumn(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 2;
+            PayoutVariable = 2;
             if (IsNumberZero(randomNumber))
             {
                 int guess = placementOfBet % 3;
@@ -304,11 +328,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -323,12 +347,13 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetSplit(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 17;
+            PayoutVariable = 17;
             if (IsNumberZero(randomNumber))
             {
                 int guess = 0;
                 int rowCount = 0;
                 int rowRandom = 0;
+                isChecked = false;
 
                 List<Array> rows = new List<Array>();
                 #region Arrays
@@ -462,18 +487,15 @@ namespace Casion
                         {
                             guess = rowCount;
                         }
-                    }
-                    rowCount++;
-                }
-
-                foreach (Array tableRows in rows)
-                {
-                    foreach (int numberInRow in tableRows)
-                    {
                         if (randomNumber == numberInRow)
                         {
                             rowRandom = rowCount;
+                            isChecked = true;
                         }
+                    }
+                    if (isChecked)
+                    {
+                        break;
                     }
                     rowCount++;
                 }
@@ -489,11 +511,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -508,12 +530,13 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetStreet(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 11;
+            PayoutVariable = 11;
             if (IsNumberZero(randomNumber))
             {
                 int guess = 0;
                 int rowCount = 0;
                 int rowRandom = 0;
+                isChecked = false;
 
                 List<Array> rows = new List<Array>();
                 #region Arrays
@@ -553,18 +576,15 @@ namespace Casion
                         {
                             guess = rowCount;
                         }
-                    }
-                    rowCount++;
-                }
-
-                foreach (Array tableRows in rows)
-                {
-                    foreach (int numberInRow in tableRows)
-                    {
-                        if (placementOfBet == numberInRow)
+                        if (randomNumber == numberInRow)
                         {
                             rowRandom = rowCount;
+                            isChecked = true;
                         }
+                    }
+                    if (isChecked)
+                    {
+                        break;
                     }
                     rowCount++;
                 }
@@ -580,11 +600,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -599,12 +619,13 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetCorner(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 8;
+            PayoutVariable = 8;
             if (IsNumberZero(randomNumber))
             {
                 int guess = 0;
                 int rowCount = 0;
                 int rowRandom = 0;
+                isChecked = false;
                 
                 List<Array> corners = new List<Array>();
                 #region Arrays
@@ -656,6 +677,7 @@ namespace Casion
                 corners.Add(twentyTwoCorner);
                 #endregion
 
+
                 //Leder efter det nummer man satsede på, og går igennem listen med de forskellige mulige corners, som indeholder hver deres sæt af tal
                 foreach (Array tableCorner in corners)
                 {
@@ -665,20 +687,18 @@ namespace Casion
                         {
                             guess = rowCount;
                         }
-                    }
-                    rowCount++;
-                }
-
-                foreach (Array tableCorners in corners)
-                {
-                    foreach (int numberInCorner in tableCorners)
-                    {
-                        if (placementOfBet == numberInCorner)
+                        if (randomNumber == numberInCorner)
                         {
                             rowRandom = rowCount;
+                            isChecked = true;
                         }
                     }
+
                     rowCount++;
+                    if (isChecked)
+                    {
+                        break;
+                    }
                 }
 
                 Console.WriteLine("Your bettet on number: {0}, which is in row: {1}", placementOfBet, guess);
@@ -692,11 +712,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
@@ -711,60 +731,21 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetFive(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 6;
-            if (IsNumberZero(randomNumber))
+            PayoutVariable = 6;
+            if (placementOfBet <= 3 || placementOfBet == 37)
             {
-                bool guess = false;
-                bool rowRandom = false;
-
-                List<Array> five = new List<Array>();
-                #region Arrays
-                int[] firstRow = new int[] { 0, 1, 2, 3, 37 }; //37 = 00
-
-                #endregion
-                #region add arrays to list 'rows'
-                five.Add(firstRow);
-                #endregion
-
-                foreach (Array tableRows in five)
-                {
-                    foreach (int number in tableRows)
-                    {
-                        if (placementOfBet == number)
-                        {
-                            guess = true;
-                        }
-                    }
-                }
-
-                foreach (Array tableRows in five)
-                {
-                    foreach (int number in tableRows)
-                    {
-                        if (randomNumber == number)
-                        {
-                            rowRandom = true;
-                        }
-                    }
-                }
-
                 Console.WriteLine("Your bettet on one of 'The Five': {0}", placementOfBet);
                 Console.WriteLine("The ball landed on: {0}", randomNumber);
-
-                if (rowRandom == guess && rowRandom == true)
+                if (randomNumber <= 3 || randomNumber == 37)
                 {
                     winLose = true;
+                    return BetCheck(bet, PayoutVariable, winLose);
                 }
-                else
-                {
-                    winLose = false;
-                }
-                return BetCheck(bet, payoutVariable, winLose);
             }
-            else
-            {
-                return BetCheck(bet, payoutVariable, false);
-            }
+
+            winLose = false;
+            return BetCheck(bet, PayoutVariable, winLose);
+
         }
 
         /// <summary>
@@ -778,7 +759,7 @@ namespace Casion
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
         public int BetLine(int bet, int placementOfBet, int randomNumber)
         {
-            payoutVariable = 5;
+            PayoutVariable = 5;
             if (IsNumberZero(randomNumber))
             {
                 int guess = 0;
@@ -812,7 +793,7 @@ namespace Casion
                 rows.Add(tenthRow);
                 rows.Add(eleventhRow);
                 #endregion
-
+                isChecked = false;
                 foreach (Array tableRows in rows)
                 {
                     foreach (int numberInRow in tableRows)
@@ -821,18 +802,15 @@ namespace Casion
                         {
                             guess = rowCount;
                         }
-                    }
-                    rowCount++;
-                }
-
-                foreach (Array tableRows in rows)
-                {
-                    foreach (int numberInRow in tableRows)
-                    {
-                        if (placementOfBet == numberInRow)
+                        if (randomNumber == numberInRow)
                         {
                             rowRandom = rowCount;
+                            isChecked = true;
                         }
+                    }
+                    if (isChecked)
+                    {
+                        break;
                     }
                     rowCount++;
                 }
@@ -848,11 +826,11 @@ namespace Casion
                 {
                     winLose = false;
                 }
-                return BetCheck(bet, payoutVariable, winLose);
+                return BetCheck(bet, PayoutVariable, winLose);
             }
             else
             {
-                return BetCheck(bet, payoutVariable, false);
+                return BetCheck(bet, PayoutVariable, false);
             }
         }
 
