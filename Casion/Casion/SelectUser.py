@@ -18,7 +18,7 @@ for row in rows:
     print "Save Name", row[1]
     print "Save Money", row[2]
 
-playerinput = raw_input("Select a save file (Write the ID number)")
+playerinput = raw_input("Select a save file (Write the ID number)\n")
   
 with con: 
     cur.execute("Select * from Player where Id = " + playerinput)

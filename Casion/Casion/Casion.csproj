@@ -601,6 +601,9 @@
     <None Include="SelectUser.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="UpdateDatabase.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\site-packages\README.txt" />

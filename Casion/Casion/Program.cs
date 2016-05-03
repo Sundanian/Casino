@@ -17,25 +17,41 @@ namespace Casion
             engine = Python.CreateEngine();
             CreateDatabase();
             DrawRouletteTable();
-            StartGame();
+            Player p = StartGame();
+            p.Money += 100;
+            UpdateDatabase(p);
         }
-        public static void StartGame()
+        /// <summary>
+        /// Updates the database with the given player.
+        /// </summary>
+        /// <param name="player">The player that should be updated</param>
+        public static void UpdateDatabase(Player player)
         {
-            Console.WriteLine("Enter 'n' for new game og 'l' to load an existing game");
-            string input = Console.ReadLine().ToUpper();
-            switch (input)
+            dynamic scope = engine.CreateScope();
+            engine.ExecuteFile("UpdateDatabase.py", scope);
+            var method = scope.GetVariable("Update");
+            method(player.Id.ToString(), player.Money.ToString());
+        }
+        /// <summary>
+        /// Prompts the user with the choice of a new gamg or an existing game. Returns the player created by the user.
+        /// </summary>
+        public static Player StartGame()
+        {
+            do
             {
-                case "N":
-                    NewUser();
-                    break;
-                case "L":
-                    SelectUser();
-                    break;
-                default:
-                    Console.WriteLine("I dont understand your input...");
-                    break;
-            }
-
+                Console.WriteLine("Enter 'n' for new game or 'l' to load an existing game");
+                string input = Console.ReadLine().ToUpper();
+                switch (input)
+                {
+                    case "N":
+                        return NewUser();
+                    case "L":
+                        return SelectUser();
+                    default:
+                        Console.WriteLine("I dont understand your input...");
+                        break;
+                }
+            } while (true);
         }
         /// <summary>
         /// Let the user make a new playerprofile. 
