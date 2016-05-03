@@ -35,6 +35,8 @@ namespace Casion
                     Console.WriteLine("Your balance: " + player.Money);
                     Console.WriteLine("Enter your bet amount:");
                     int bet = Convert.ToInt32(Console.ReadLine());
+					if (bet < player.Money)
+					{
                     Console.WriteLine("What bet will you make?");
                     Console.WriteLine("1: Bet Straight Up\n2: Even/Odd\n3: Low/High\n4: Red/Black\n5: Dozen\n6: Column\n7: Split\n8: Street\n9: Corner\n10: Five\n11: Line");
                     switch (Console.ReadLine())
@@ -47,6 +49,11 @@ namespace Casion
                             Console.WriteLine("I don't understand you input...");
                             break;
                     }
+					else
+					{
+					Console.WriteLine("Bet to high. Please make another.");
+					}
+					}
                     SaveGame(player);
                     Console.WriteLine("Do you want to bed again? (y/n)");
                     if (Console.ReadLine().ToUpper() == "Y")
