@@ -21,7 +21,7 @@ namespace Casion
         }
         public static void StartGame()
         {
-            Console.WriteLine("Enter 'n' for new game og 'l' to load an existing game");
+            Console.WriteLine("Enter 'n' for new game and 'l' to load an existing game");
             string input = Console.ReadLine().ToUpper();
             switch (input)
             {
