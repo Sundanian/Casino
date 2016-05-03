@@ -19,32 +19,61 @@ namespace Casion
         TODO:
         Tjek på om man kan lave bet.
         Skrive switchcase.
-        Logik med gameloop.
         */
 
         static void Main(string[] args)
         {
             Setup();
 
-            do
+            Console.WriteLine("Do you want to make bed on the roulette? (y/n)");
+            if (Console.ReadLine().ToUpper() == "Y")
             {
-                DrawRouletteTable();
-                Console.WriteLine("Enter you bet amount:");
-                int bet = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("What bet will you make?");
-                Console.WriteLine("1: Bet Straight Up\n2: Even/Odd\n3: Low/High\n4: Red/Black\n5: Dozen\n6: Column\n7: Split\n8: Street\n9: Corner\n10: Five\n11: Line");
-                switch (Console.ReadLine())
+                bool loop = true;
+                do
                 {
-                    case "1":
-                        Console.WriteLine("Enter the number you bet on:");
-                        betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
-                        break;
-                    default:
-                        Console.WriteLine("I don't understand you input...");
-                        break;
-                }
+                    DrawRouletteTable();
+                    Console.WriteLine("Your balance: " + player.Money);
+                    Console.WriteLine("Enter your bet amount:");
+                    int bet = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("What bet will you make?");
+                    Console.WriteLine("1: Bet Straight Up\n2: Even/Odd\n3: Low/High\n4: Red/Black\n5: Dozen\n6: Column\n7: Split\n8: Street\n9: Corner\n10: Five\n11: Line");
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            Console.WriteLine("Enter the number you bet on:");
+                            betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                            break;
+                        default:
+                            Console.WriteLine("I don't understand you input...");
+                            break;
+                    }
+                    SaveGame(player);
+                    Console.WriteLine("Do you want to bed again? (y/n)");
+                    if (Console.ReadLine().ToUpper() == "Y")
+                    {
+                        loop = true;
+                    }
+                    else
+                    {
+                        loop = false;
+                        EndGame();
+                    }
+                } while (loop);
+            }
+            else
+            {
                 SaveGame(player);
-            } while (true);
+                EndGame();
+            }
+        }
+        /// <summary>
+        /// Saves the player and ends the game.
+        /// </summary>
+        public static void EndGame()
+        {
+            Console.WriteLine("You entered n or something not recognized.");
+            Console.WriteLine("Ending game...");
+            Console.ReadKey();
         }
         /// <summary>
         /// The important code that needs to run at startup.
@@ -57,6 +86,7 @@ namespace Casion
             player = StartGame();
             roulette = new Roulette();
             betting = new Betting(player);
+            DrawRouletteTable();
         }
         /// <summary>
         /// Saves the game by updateing the database with the given player.
@@ -64,10 +94,6 @@ namespace Casion
         /// <param name="player">The player that should be updated</param>
         public static void SaveGame(Player player)
         {
-
-            Console.WriteLine("Enter 'n' for new game and 'l' to load an existing game");
-            string input = Console.ReadLine().ToUpper();
-
             dynamic scope = engine.CreateScope();
             engine.ExecuteFile("UpdateDatabase.py", scope);
             var method = scope.GetVariable("Update");
