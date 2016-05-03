@@ -21,13 +21,13 @@ namespace Casion
             
             //Tmp kode
             player.Money += 100;
-            UpdateDatabase(player);
+            SaveGame(player);
         }
         /// <summary>
-        /// Updates the database with the given player.
+        /// Saves the game by updateing the database with the given player.
         /// </summary>
         /// <param name="player">The player that should be updated</param>
-        public static void UpdateDatabase(Player player)
+        public static void SaveGame(Player player)
         {
             dynamic scope = engine.CreateScope();
             engine.ExecuteFile("UpdateDatabase.py", scope);
@@ -35,7 +35,7 @@ namespace Casion
             method(player.Id.ToString(), player.Money.ToString());
         }
         /// <summary>
-        /// Prompts the user with the choice of a new gamg or an existing game. Returns the player created by the user.
+        /// Prompts the user with the choice of a new game or an existing game. Returns the player created by the user.
         /// </summary>
         public static Player StartGame()
         {
@@ -78,7 +78,7 @@ namespace Casion
             return new Player(scope.GetVariable("playerId"), scope.GetVariable("playerName"), scope.GetVariable("playerMoney"));
         }
         /// <summary>
-        /// Creates our databse by running the python script called "DatabaseScript.py".
+        /// Creates the database by running the python script called "DatabaseScript.py".
         /// </summary>
         public static void CreateDatabase()
         {
@@ -119,7 +119,7 @@ namespace Casion
             Green("   -----------------------   \n");
         }
         /// <summary>
-        /// Writes given text on dark green background.
+        /// Writes given text on a dark green background.
         /// </summary>
         /// <param name="txt">String to write</param>
         public static void Green(string txt)
@@ -129,7 +129,7 @@ namespace Casion
             Console.Write(txt);
         }
         /// <summary>
-        /// Writes given text on black background with white text.
+        /// Writes given text on a black background with white text.
         /// </summary>
         /// <param name="txt">String to write</param>
         public static void Black(string txt)
@@ -139,7 +139,7 @@ namespace Casion
             Console.Write(txt);
         }
         /// <summary>
-        /// Writes given text on red background.
+        /// Writes given text on a red background.
         /// </summary>
         /// <param name="txt">String to write</param>
         public static void Red(string txt)
