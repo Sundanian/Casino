@@ -8,131 +8,145 @@ namespace Casion
 { 
     class Roulette
     {
-        public string result = "";
-        static Random random = new Random();
+        Random random = new Random();
 
-        public string Spin()
+        private int intResult;
+
+        public int IntResult
+        {
+            get
+            {
+                return intResult;
+            }
+
+            set
+            {
+                intResult = value;
+            }
+        }
+
+        public int Spin()
         {
             int randomNumber = random.Next(1, 39);
 
             switch (randomNumber)
             {
                 case 1:
-                    result = "Green 0";
+                    IntResult = 0;
                     break;
                 case 2:
-                    result = "Green 00";
+                    IntResult = 37;
                     break;
                 case 3:
-                    result = "Red 1";
+                    IntResult = randomNumber - 2;
                     break;
                 case 4:
-                    result = "Black 2";
+                    IntResult = randomNumber - 2;
                     break;
                 case 5:
-                    result = "Red 3";
+                    IntResult = randomNumber - 2;
                     break;
                 case 6:
-                    result = "Black 4";
+                    IntResult = randomNumber - 2;
                     break;
                 case 7:
-                    result = "Red 5";
+                    IntResult = randomNumber - 2;
                     break;
                 case 8:
-                    result = "Black 6";
+                    IntResult = randomNumber - 2;
                     break;
                 case 9:
-                    result = "Red 7";
+                    IntResult = randomNumber - 2;
                     break;
                 case 10:
-                    result = "Black 8";
+                    IntResult = randomNumber - 2;
                     break;
                 case 11:
-                    result = "Red 9";
+                    IntResult = randomNumber - 2;
                     break;
                 case 12:
-                    result = "Black 10";
+                    IntResult = randomNumber - 2;
                     break;
                 case 13:
-                    result = "Black 11";
+                    IntResult = randomNumber - 2;
                     break;
                 case 14:
-                    result = "Red 12";
+                    IntResult = randomNumber - 2;
                     break;
                 case 15:
-                    result = "Black 13";
+                    IntResult = randomNumber - 2;
                     break;
                 case 16:
-                    result = "Red 14";
+                    IntResult = randomNumber - 2;
                     break;
                 case 17:
-                    result = "Black 15";
+                    IntResult = randomNumber - 2;
                     break;
                 case 18:
-                    result = "Red 16";
+                    IntResult = randomNumber - 2;
                     break;
                 case 19:
-                    result = "Black 17";
+                    IntResult = randomNumber - 2;
                     break;
                 case 20:
-                    result = "Red 18";
+                    IntResult = randomNumber - 2;
                     break;
                 case 21:
-                    result = "Red 19";
+                    IntResult = randomNumber - 2;
                     break;
                 case 22:
-                    result = "Black 20";
+                    IntResult = randomNumber - 2;
                     break;
                 case 23:
-                    result = "Red 21";
+                    IntResult = randomNumber - 2;
                     break;
                 case 24:
-                    result = "Black 22";
+                    IntResult = randomNumber - 2;
                     break;
                 case 25:
-                    result = "Red 23";
+                    IntResult = randomNumber - 2;
                     break;
                 case 26:
-                    result = "Black 24";
+                    IntResult = randomNumber - 2;
                     break;
                 case 27:
-                    result = "Red 25";
+                    IntResult = randomNumber - 2;
                     break;
                 case 28:
-                    result = "Black 26";
+                    IntResult = randomNumber - 2;
                     break;
                 case 29:
-                    result = "Red 27";
+                    IntResult = randomNumber - 2;
                     break;
                 case 30:
-                    result = "Black 28";
+                    IntResult = randomNumber - 2;
                     break;
                 case 31:
-                    result = "Black 29";
+                    IntResult = randomNumber - 2;
                     break;
                 case 32:
-                    result = "Red 30";
+                    IntResult = randomNumber - 2;
                     break;
                 case 33:
-                    result = "Black 31";
+                    IntResult = randomNumber - 2;
                     break;
                 case 34:
-                    result = "Red 32";
+                    IntResult = randomNumber - 2;
                     break;
                 case 35:
-                    result = "Black 33";
+                    IntResult = randomNumber - 2;
                     break;
                 case 36:
-                    result = "Red 34";
+                    IntResult = randomNumber - 2;
                     break;
                 case 37:
-                    result = "Black 35";
+                    IntResult = randomNumber - 2;
                     break;
                 case 38:
-                    result = "red 36";
+                    IntResult = randomNumber - 2;
                     break;
             }
-            return result;
+            return intResult;
         }
     }
 }
