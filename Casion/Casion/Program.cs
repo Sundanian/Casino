@@ -19,7 +19,7 @@ namespace Casion
         {
             Setup();
 
-            Console.WriteLine("Do you want to make bed on the roulette? (y/n)");
+            Console.WriteLine("Do you want to make bet on the roulette? (y/n)");
             if (Console.ReadLine().ToUpper() == "Y")
             {
                 GameLoop();
@@ -42,7 +42,7 @@ namespace Casion
                 Console.WriteLine("Your balance: " + player.Money);
                 Console.WriteLine("Enter your bet amount:");
                 int bet = Convert.ToInt32(Console.ReadLine());
-                if (bet < player.Money)
+                if (bet <= player.Money)
                 {
                     BetThree(bet);
                 }
@@ -51,7 +51,7 @@ namespace Casion
                     Console.WriteLine("Bet to high. Please make another.");
                 }
                 SaveGame(player);
-                Console.WriteLine("Do you want to bed again? (y/n)");
+                Console.WriteLine("Do you want to bet again? (y/n)");
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
                     loop = true;

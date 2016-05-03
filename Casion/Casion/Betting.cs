@@ -73,11 +73,11 @@ namespace Casion
                 int rNumber = randomNumber % 2;
                 if (guess == 1)
                 {
-                    Console.WriteLine("Your betting on 'Odd'");
+                    Console.WriteLine("You're betting on 'Odd'");
                 }
                 if (guess == 0)
                 {
-                    Console.WriteLine("Your betting on 'Even'");
+                    Console.WriteLine("You're betting on 'Even'");
                 }
                 if (rNumber == 1)
                 {
@@ -122,12 +122,12 @@ namespace Casion
                 bool rNumber = false;
                 if (placementOfBet <= 18)
                 {
-                    Console.WriteLine("Your betting on 'Low', 18 and below..");
+                    Console.WriteLine("You're betting on 'Low', 18 and below..");
                     guess = false;
                 }
                 if (placementOfBet >= 19)
                 {
-                    Console.WriteLine("Your betting on 'High' 19 and above..");
+                    Console.WriteLine("Your're betting on 'High' 19 and above..");
                     guess = true;
                 }
                 if (randomNumber <= 18)
@@ -177,12 +177,12 @@ namespace Casion
                     placementOfBet == 16 || placementOfBet == 18 || placementOfBet == 19 || placementOfBet == 21 || placementOfBet == 23 || placementOfBet == 25 || placementOfBet == 27 ||
                     placementOfBet == 30 || placementOfBet == 32 || placementOfBet == 34 || placementOfBet == 36)
                 {
-                    Console.WriteLine("Your betting on 'Red'..");
+                    Console.WriteLine("You're betting on 'Red'..");
                     guess = false;
                 }
                 else
                 {
-                    Console.WriteLine("Your betting on 'Black'..");
+                    Console.WriteLine("You're betting on 'Black'..");
                     guess = true;
                 }
 
@@ -236,19 +236,19 @@ namespace Casion
                 bool is36 = false;
                 if (placementOfBet <= 12)
                 {
-                    Console.WriteLine("Your betting on a Dozen between '1-12'..");
+                    Console.WriteLine("You're betting on a Dozen between '1-12'..");
                     guess = true;
                     is12 = true;
                 }
                 if (placementOfBet >= 13 && placementOfBet <= 24)
                 {
-                    Console.WriteLine("Your betting on a Dozen between '13-24'..");
+                    Console.WriteLine("You're betting on a Dozen between '13-24'..");
                     guess = true;
                     is24 = true;
                 }
                 if (placementOfBet >= 25 && placementOfBet <= 36)
                 {
-                    Console.WriteLine("Your betting on a Dozen between '25-36'..");
+                    Console.WriteLine("You're betting on a Dozen between '25-36'..");
                     guess = true;
                     is36 = true;
                 }
@@ -302,19 +302,19 @@ namespace Casion
                 int rNumber = randomNumber % 3;
                 if (guess == 2)
                 {
-                    Console.WriteLine("Your betting on '2nd column");
+                    Console.WriteLine("You're betting on '2nd column");
                 }
                 if (guess == 1)
                 {
-                    Console.WriteLine("Your betting on '1st column'");
+                    Console.WriteLine("You're betting on '1st column'");
                 }
                 if (guess == 0)
                 {
-                    Console.WriteLine("Your betting on '3rd column'");
+                    Console.WriteLine("You're betting on '3rd column'");
                 }
                 if (rNumber == 2)
                 {
-                    Console.WriteLine("The roulette is showing {0}, which is in the '2st column'", randomNumber);
+                    Console.WriteLine("The roulette is showing {0}, which is in the '2nd column'", randomNumber);
                 }
                 if (rNumber == 1)
                 {
@@ -505,7 +505,7 @@ namespace Casion
                     rowCount++;
                 }
 
-                Console.WriteLine("Your bettet on number: {0}, which is in row: {1}", placementOfBet, guess);
+                Console.WriteLine("Your bet was on number: {0}, which is in row: {1}", placementOfBet, guess);
                 Console.WriteLine("The ball landed on: {0}, which is in row: {1}", randomNumber, rowRandom);
 
                 if (guess == rowRandom)
@@ -594,7 +594,7 @@ namespace Casion
                     rowCount++;
                 }
 
-                Console.WriteLine("Your bettet number: {0}, which is in row: {1}", placementOfBet, guess);
+                Console.WriteLine("Your bet was on number: {0}, which is in row: {1}", placementOfBet, guess);
                 Console.WriteLine("The ball landed on: {0}, which is in row {1}", randomNumber, rowRandom);
 
                 if (rowRandom == guess)
@@ -706,7 +706,7 @@ namespace Casion
                     }
                 }
 
-                Console.WriteLine("Your bettet on number: {0}, which is in row: {1}", placementOfBet, guess);
+                Console.WriteLine("Your bet was on number: {0}, which is in row: {1}", placementOfBet, guess);
                 Console.WriteLine("The ball landed on: {0}, which is in row: {1}", randomNumber, rowRandom);
 
                 if (guess == rowRandom)
@@ -739,7 +739,7 @@ namespace Casion
             PayoutVariable = 6;
             if (placementOfBet <= 3 || placementOfBet == 37)
             {
-                Console.WriteLine("Your bettet on one of 'The Five': {0}", placementOfBet);
+                Console.WriteLine("Your bet was on one of 'The Five': {0}", placementOfBet);
                 Console.WriteLine("The ball landed on: {0}", randomNumber);
                 if (randomNumber <= 3 || randomNumber == 37)
                 {
@@ -820,7 +820,7 @@ namespace Casion
                     rowCount++;
                 }
 
-                Console.WriteLine("Your bettet on number: {0}, which is in row: {1}", placementOfBet, guess);
+                Console.WriteLine("Your bet was on number: {0}, which is in row: {1}", placementOfBet, guess);
                 Console.WriteLine("The ball landed on: {0}, which is in row {1}", randomNumber, rowRandom);
 
                 if (rowRandom == guess)
