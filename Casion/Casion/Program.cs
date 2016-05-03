@@ -15,10 +15,14 @@ namespace Casion
         static void Main(string[] args)
         {
             engine = Python.CreateEngine();
-            CreateDatabase();
+			CreateDatabase();
             DrawRouletteTable();
             Player player = StartGame();
-            
+			Roulette r = new Roulette();
+            int result = r.Spin();
+
+            Betting myBet = new Betting();
+
             //Tmp kode
             player.Money += 100;
             SaveGame(player);
