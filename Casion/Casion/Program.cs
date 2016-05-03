@@ -42,12 +42,78 @@ namespace Casion
                         switch (Console.ReadLine())
                         {
                             case "1":
-                                Console.WriteLine("Enter the number you bet on:");
-                                betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        Console.WriteLine("Enter the number you'll bet on: ");
+                        betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    case "2":
+                        Console.WriteLine("Enter Even for even or Odd for odd: ");
+                        string evenOrOdd = Console.ReadLine();
+                        int evenOrOddNumber = 0;
+                        switch (evenOrOdd.ToUpper())
+                        {
+                            case "EVEN":
+                                evenOrOddNumber = 2;
+                                break;
+                            case "ODD":
+                                evenOrOddNumber = 1;
                                 break;
                             default:
-                                Console.WriteLine("I don't understand you input...");
                                 break;
+                        }
+                        betting.BetEvenOrOdd(bet, evenOrOddNumber, roulette.Spin());
+                        break;
+                    case "3":
+                        Console.WriteLine("Enter 18 or below for 'Low', and 19 or higher for 'High': ");
+                        betting.BetLowOrHigh(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    case "4":
+                        Console.WriteLine("Enter 'Red' for red or 'Black' for black: ");
+                        string redorblack = Console.ReadLine();
+                        int redorblacknumber = 0;
+                        switch (redorblack.ToUpper())
+                        {
+                            case "RED":
+                                redorblacknumber = 1;
+                                break;
+                            case "BLACK":
+                                redorblacknumber = 2;
+                                break;
+                            default:
+                                break;
+                        }
+                        betting.BetRedOrBlack(bet, redorblacknumber, roulette.Spin());
+                        break;
+                    case "5":
+                        Console.WriteLine("Enter a number between '1-12', '13-24' or '25-36': ");
+                        betting.BetDozen(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    case "6":
+                        Console.WriteLine("Enter a coluom number between 1 and 3: ");
+                        betting.BetColumn(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    case "7":
+                        Console.WriteLine("Enter the numbers you'll bet on.\nThe Numbers have to be linked to eachother!\n F.x. if you want to bet on '6-3', you enter \"3\" and press 'Enter'..\n Starting with the lowest number: ");
+                        betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    case "8":
+                        Console.WriteLine("Enter the street-number you'll bet on.\nYou can just 'enter' a number, which is in the line, that you want to bet on!\n..: ");
+                        betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    case "9":
+                        Console.WriteLine("Enter the number you'll bet on.\nYou can just 'enter' the number in the top left corner, of the square you want to bet on!\n..: ");
+                        betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    case "10":
+                        Console.WriteLine("Betting on the Five (0, 00, 1, 2, 3).\n");
+                        betting.BetStraigthUp(bet, 1, roulette.Spin());
+                        break;
+                    case "11":
+                        Console.WriteLine("Enter the first number of the two lines, you want to bet on.\nYou can just 'enter' the number in the top left corner, of the lines you want to bet on!\n..: ");
+                        betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                        break;
+                    default:
+                        Console.WriteLine("I don't understand your input...");
+                        break;
                         }
                     }
                     else
