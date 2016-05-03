@@ -20,7 +20,7 @@ try:
         print "Save Name", row[1]
         print "Save Money", row[2]
 
-	Console.WriteLine("Select a save file (Write the ID number)")
+    Console.WriteLine("Select a save file (Write the ID number)")
     playerinput = Console.ReadLine()
 
   

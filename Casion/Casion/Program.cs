@@ -29,11 +29,10 @@ namespace Casion
         /// <param name="player">The player that should be updated</param>
         public static void SaveGame(Player player)
         {
-<<<<<<< HEAD
+
             Console.WriteLine("Enter 'n' for new game and 'l' to load an existing game");
             string input = Console.ReadLine().ToUpper();
-            switch (input)
-=======
+
             dynamic scope = engine.CreateScope();
             engine.ExecuteFile("UpdateDatabase.py", scope);
             var method = scope.GetVariable("Update");
@@ -45,7 +44,6 @@ namespace Casion
         public static Player StartGame()
         {
             do
->>>>>>> origin/Horne
             {
                 Console.WriteLine("Enter 'n' for new game or 'l' to load an existing game");
                 string input = Console.ReadLine().ToUpper();
