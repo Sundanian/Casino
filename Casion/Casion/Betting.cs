@@ -252,20 +252,29 @@ namespace Casion
                     guess = true;
                     is36 = true;
                 }
-                if (randomNumber <= 12 && is12 == true)
+                if (randomNumber <= 12)
                 {
                     Console.WriteLine("The ball landed on: {0}..", randomNumber);
-                    rNumber = true;
+                    if (is12)
+                    {
+                        rNumber = true;
+                    }
                 }
-                if (randomNumber >= 13 && randomNumber <= 24 && is24 == true)
+                if (randomNumber >= 13 && randomNumber <= 24)
                 {
                     Console.WriteLine("The ball landed on: {0}..", randomNumber);
-                    rNumber = true;
+                    if (is24)
+                    {
+                        rNumber = true;
+                    }
                 }
-                if (randomNumber >= 25 && randomNumber <= 36 && is36 == true)
+                if (randomNumber >= 25 && randomNumber <= 36)
                 {
                     Console.WriteLine("The ball landed on: {0}..", randomNumber);
-                    rNumber = true;
+                    if (is36)
+                    {
+                        rNumber = true;
+                    }
                 }
 
                 if (guess == rNumber)
