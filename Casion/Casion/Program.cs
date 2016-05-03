@@ -31,6 +31,8 @@ namespace Casion
                 DrawRouletteTable();
                 Console.WriteLine("Enter you bet amount:");
                 int bet = Convert.ToInt32(Console.ReadLine());
+                if (bet < player.Money)
+                {
                 Console.WriteLine("What bet will you make?");
                 Console.WriteLine("1: Bet Straight Up\n2: Even/Odd\n3: Low/High\n4: Red/Black\n5: Dozen\n6: Column\n7: Split\n8: Street\n9: Corner\n10: Five\n11: Line");
                 switch (Console.ReadLine())
@@ -42,6 +44,11 @@ namespace Casion
                     default:
                         Console.WriteLine("I don't understand you input...");
                         break;
+                }
+            }
+                else
+                {
+                    Console.WriteLine("Bet to high. Please make another.");
                 }
                 SaveGame(player);
             } while (true);
