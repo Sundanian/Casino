@@ -17,9 +17,11 @@ namespace Casion
             engine = Python.CreateEngine();
             CreateDatabase();
             DrawRouletteTable();
-            Player p = StartGame();
-            p.Money += 100;
-            UpdateDatabase(p);
+            Player player = StartGame();
+            
+            //Tmp kode
+            player.Money += 100;
+            UpdateDatabase(player);
         }
         /// <summary>
         /// Updates the database with the given player.
@@ -90,9 +92,11 @@ namespace Casion
         /// </summary>
         public static void DrawRouletteTable()
         {
+            //Draws the background Dark Green
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.Clear();
             
+            //Draws the roulette table
             Green("   -----------------------   \n");
             Green("  /    CASINO ROULETTE    \\  \n");
             Green(" /                         \\ \n");
