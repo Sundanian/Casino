@@ -17,25 +17,49 @@ namespace Casion
             engine = Python.CreateEngine();
             CreateDatabase();
             DrawRouletteTable();
-            StartGame();
+            Player player = StartGame();
+            
+            //Tmp kode
+            player.Money += 100;
+            SaveGame(player);
         }
-        public static void StartGame()
+        /// <summary>
+        /// Saves the game by updateing the database with the given player.
+        /// </summary>
+        /// <param name="player">The player that should be updated</param>
+        public static void SaveGame(Player player)
         {
+<<<<<<< HEAD
             Console.WriteLine("Enter 'n' for new game and 'l' to load an existing game");
             string input = Console.ReadLine().ToUpper();
             switch (input)
+=======
+            dynamic scope = engine.CreateScope();
+            engine.ExecuteFile("UpdateDatabase.py", scope);
+            var method = scope.GetVariable("Update");
+            method(player.Id.ToString(), player.Money.ToString());
+        }
+        /// <summary>
+        /// Prompts the user with the choice of a new game or an existing game. Returns the player created by the user.
+        /// </summary>
+        public static Player StartGame()
+        {
+            do
+>>>>>>> origin/Horne
             {
-                case "N":
-                    NewUser();
-                    break;
-                case "L":
-                    SelectUser();
-                    break;
-                default:
-                    Console.WriteLine("I dont understand your input...");
-                    break;
-            }
-
+                Console.WriteLine("Enter 'n' for new game or 'l' to load an existing game");
+                string input = Console.ReadLine().ToUpper();
+                switch (input)
+                {
+                    case "N":
+                        return NewUser();
+                    case "L":
+                        return SelectUser();
+                    default:
+                        Console.WriteLine("I dont understand your input...");
+                        break;
+                }
+            } while (true);
         }
         /// <summary>
         /// Let the user make a new playerprofile. 
@@ -60,7 +84,7 @@ namespace Casion
             return new Player(scope.GetVariable("playerId"), scope.GetVariable("playerName"), scope.GetVariable("playerMoney"));
         }
         /// <summary>
-        /// Creates our databse by running the python script called "DatabaseScript.py".
+        /// Creates the database by running the python script called "DatabaseScript.py".
         /// </summary>
         public static void CreateDatabase()
         {
@@ -74,9 +98,11 @@ namespace Casion
         /// </summary>
         public static void DrawRouletteTable()
         {
+            //Draws the background Dark Green
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.Clear();
             
+            //Draws the roulette table
             Green("   -----------------------   \n");
             Green("  /    CASINO ROULETTE    \\  \n");
             Green(" /                         \\ \n");
@@ -99,7 +125,7 @@ namespace Casion
             Green("   -----------------------   \n");
         }
         /// <summary>
-        /// Writes given text on dark green background.
+        /// Writes given text on a dark green background.
         /// </summary>
         /// <param name="txt">String to write</param>
         public static void Green(string txt)
@@ -109,7 +135,7 @@ namespace Casion
             Console.Write(txt);
         }
         /// <summary>
-        /// Writes given text on black background with white text.
+        /// Writes given text on a black background with white text.
         /// </summary>
         /// <param name="txt">String to write</param>
         public static void Black(string txt)
@@ -119,7 +145,7 @@ namespace Casion
             Console.Write(txt);
         }
         /// <summary>
-        /// Writes given text on red background.
+        /// Writes given text on a red background.
         /// </summary>
         /// <param name="txt">String to write</param>
         public static void Red(string txt)
