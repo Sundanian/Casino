@@ -44,7 +44,7 @@ namespace Casion
                 int bet = Convert.ToInt32(Console.ReadLine());
                 if (bet <= player.Money)
                 {
-                    BetThree(bet);
+                    BetTree(bet);
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace Casion
         /// The decision three for what bet the user want to make.
         /// </summary>
         /// <param name="bet">The amount of money the user bets.</param>
-        public static void BetThree(int bet)
+        public static void BetTree(int bet)
         {
             DrawRouletteTable();
             Console.WriteLine("What bet will you make?");
