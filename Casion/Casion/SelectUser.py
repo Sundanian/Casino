@@ -22,7 +22,7 @@ try:
         print "Save Name", row[1]
         print "Save Money", row[2]
         print ""
-        i += 1
+        i += 1        
 
     while True:
         Console.WriteLine("Select a save file (Write the ID number)")

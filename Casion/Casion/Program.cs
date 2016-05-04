@@ -14,6 +14,7 @@ namespace Casion
         static Player player;
         static Roulette roulette;
         static Betting betting;
+        static bool existingPlayers;
 
         static void Main(string[] args)
         {
@@ -157,7 +158,7 @@ namespace Casion
                     Console.WriteLine("I don't understand your input...");
                     break;
             }
-           // DrawRouletteTable();
+            // DrawRouletteTable();
         }
         /// <summary>
         /// Saves the player and ends the game.
@@ -197,21 +198,28 @@ namespace Casion
         /// </summary>
         public static Player StartGame()
         {
-            do
+            if (existingPlayers)
             {
-                Console.WriteLine("Enter 'n' for new game or 'l' to load an existing game");
-                string input = Console.ReadLine().ToUpper();
-                switch (input)
+                do
                 {
-                    case "N":
-                        return NewUser();
-                    case "L":
-                        return SelectUser();
-                    default:
-                        Console.WriteLine("I dont understand your input...");
-                        break;
-                }
-            } while (true);
+                    Console.WriteLine("Enter 'n' for new game or 'l' to load an existing game");
+                    string input = Console.ReadLine().ToUpper();
+                    switch (input)
+                    {
+                        case "N":
+                            return NewUser();
+                        case "L":
+                            return SelectUser();
+                        default:
+                            Console.WriteLine("I dont understand your input...");
+                            break;
+                    }
+                } while (true);
+            }
+            else
+            {
+                return NewUser();
+            }
         }
         /// <summary>
         /// Let the user make a new playerprofile. 
@@ -243,7 +251,9 @@ namespace Casion
             var paths = engine.GetSearchPaths();
             paths.Add(@"Lib");
             engine.SetSearchPaths(paths);
-            engine.ExecuteFile("DatabaseScript.py");
+            dynamic scope = engine.CreateScope();
+            engine.ExecuteFile("DatabaseScript.py", scope);
+            existingPlayers = scope.GetVariable("existingPlayers");
         }
         /// <summary>
         /// Clears the console and draws the roulette table on a dark green background.

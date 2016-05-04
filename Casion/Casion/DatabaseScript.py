@@ -3,6 +3,7 @@ import sys
 
 
 con = None
+existingPlayers = True
 
 try:
     con = lite.connect('Users.db')
@@ -14,6 +15,19 @@ try:
     with con:
         cur.execute("DELETE FROM Player WHERE Money = 0")
 
+    #Tjekker om der er noget i databasen
+    cur.execute("Select * from Player")
+    rows = cur.fetchall()
+    print ""
+    i = 0 #Number of rows
+    for row in rows:
+        print "Save ID", row[0]
+        print "Save Name", row[1]
+        print "Save Money", row[2]
+        print ""
+        i += 1   
+    if i == 0:
+        existingPlayers = False
              
 except lite.Error, e:
     
