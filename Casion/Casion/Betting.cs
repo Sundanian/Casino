@@ -881,7 +881,7 @@ namespace Casion
             {
                 //You won!
                 Console.WriteLine("You won on your bet!");
-                int result = bet + (bet * payout);
+                int result = (bet * payout);
 
                 Console.WriteLine("{0} was added to your balance", result);
                 return player.Money += result;
