@@ -10,6 +10,10 @@ try:
     cur = con.cursor()    
 
     cur.execute("CREATE TABLE if not exists Player(Id INTEGER PRIMARY KEY, Name TEXT, Money int)") 
+    
+    with con:
+        cur.execute("DELETE FROM Player WHERE Money = 0")
+
              
 except lite.Error, e:
     

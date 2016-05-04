@@ -746,11 +746,11 @@ namespace Casion
         public int BetFive(int bet, int placementOfBet, int randomNumber)
         {
             PayoutVariable = 6;
-            if (placementOfBet <= 3 || placementOfBet == 37)
+            if (placementOfBet <= 3 || placementOfBet == 37 || placementOfBet == 0)
             {
                 Console.WriteLine("Your bet was on one of 'The Five': {0}", placementOfBet);
                 Console.WriteLine("The ball landed on: {0}", randomNumber);
-                if (randomNumber <= 3 || randomNumber == 37)
+                if (randomNumber <= 3 || randomNumber == 37 || randomNumber == 0)
                 {
                     winLose = true;
                     return BetCheck(bet, PayoutVariable, winLose);

@@ -39,6 +39,15 @@ namespace Casion
             do
             {
                 DrawRouletteTable();
+                if (player.Money <= 0)
+                {
+                    Console.WriteLine("You lost all your money playing roulette");
+                    Console.WriteLine("Bye!");
+                    loop = false;
+                    Console.ReadLine();
+                    return;
+                }
+
                 Console.WriteLine("Your balance: " + player.Money);
                 Console.WriteLine("Enter your bet amount:");
                 int bet = Convert.ToInt32(Console.ReadLine());
@@ -126,29 +135,29 @@ namespace Casion
                     break;
                 case "7":
                     Console.WriteLine("Enter the numbers you'll bet on.\nThe Numbers have to be linked to eachother!\n F.x. if you want to bet on '6-3', you enter \"3\" and press 'Enter'..\n Starting with the lowest number: ");
-                    betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                    betting.BetSplit(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 case "8":
                     Console.WriteLine("Enter the street-number you'll bet on.\nYou can just 'enter' a number, which is in the line, that you want to bet on!\n..: ");
-                    betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                    betting.BetStreet(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 case "9":
                     Console.WriteLine("Enter the number you'll bet on.\nYou can just 'enter' the number in the top left corner, of the square you want to bet on!\n..: ");
-                    betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                    betting.BetCorner(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 case "10":
                     Console.WriteLine("Betting on the Five (0, 00, 1, 2, 3).\n");
-                    betting.BetStraigthUp(bet, 1, roulette.Spin());
+                    betting.BetFive(bet, 1, roulette.Spin());
                     break;
                 case "11":
                     Console.WriteLine("Enter the first number of the two lines, you want to bet on.\nYou can just 'enter' the number in the top left corner, of the lines you want to bet on!\n..: ");
-                    betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                    betting.BetLine(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 default:
                     Console.WriteLine("I don't understand your input...");
                     break;
             }
-            DrawRouletteTable();
+           // DrawRouletteTable();
         }
         /// <summary>
         /// Saves the player and ends the game.
