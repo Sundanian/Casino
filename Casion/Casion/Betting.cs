@@ -127,7 +127,7 @@ namespace Casion
                 }
                 if (placementOfBet >= 19)
                 {
-                    Console.WriteLine("Your're betting on 'High' 19 and above..");
+                    Console.WriteLine("You're betting on 'High' 19 and above..");
                     guess = true;
                 }
                 if (randomNumber <= 18)

@@ -48,7 +48,7 @@ namespace Casion
                 }
                 else
                 {
-                    Console.WriteLine("Bet to high. Please make another.");
+                    Console.WriteLine("Bet too high. Please make another.");
                 }
                 SaveGame(player);
                 Console.WriteLine("Do you want to bet again? (y/n)");
@@ -79,7 +79,7 @@ namespace Casion
                     betting.BetStraigthUp(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 case "2":
-                    Console.WriteLine("Enter Even for even or Odd for odd: ");
+                    Console.WriteLine("Enter 'Even' for even or 'Odd' for odd: ");
                     string evenOrOdd = Console.ReadLine();
                     int evenOrOddNumber = 0;
                     switch (evenOrOdd.ToUpper())
