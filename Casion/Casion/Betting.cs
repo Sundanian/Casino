@@ -359,15 +359,16 @@ namespace Casion
         /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
         /// <param name="randomNumber">Roulettens Tal</param>
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
-        public int BetSplit(int bet, int placementOfBet, int randomNumber)
+        public int BetSplit(int bet, int placementOfBet, int secondPlacementBet, int randomNumber)
         {
             PayoutVariable = 17;
             if (IsNumberZero(randomNumber))
             {
-                int guess = 0;
-                int rowCount = 0;
-                int rowRandom = 0;
+                int[] guess = new int[2];
                 isChecked = false;
+
+                int[] betRow1 = new int[] { placementOfBet, secondPlacementBet };
+                int[] betRow2 = new int[] { secondPlacementBet, placementOfBet };
 
                 List<Array> rows = new List<Array>();
                 #region Arrays
@@ -493,31 +494,30 @@ namespace Casion
                 rows.Add(beRow);
                 #endregion
 
-                foreach (Array tableRows in rows)
+                foreach (int[] tableRows in rows)
                 {
-                    foreach (int numberInRow in tableRows)
+                    if (tableRows[0] == betRow1[0] && tableRows[1] == betRow1[1] ||
+                        tableRows[0] == betRow2[0] && tableRows[1] == betRow2[1])
                     {
-                        if (placementOfBet == numberInRow)
+                        guess[0] = tableRows[0];
+                        guess[1] = tableRows[1];
+                        foreach (int numberInRow in tableRows)
                         {
-                            guess = rowCount;
-                        }
-                        if (randomNumber == numberInRow)
-                        {
-                            rowRandom = rowCount;
-                            isChecked = true;
+                            if (randomNumber == numberInRow)
+                            {
+                                isChecked = true;
+                            }
                         }
                     }
                     if (isChecked)
                     {
                         break;
                     }
-                    rowCount++;
                 }
+                Console.WriteLine("Your bet was on number: {0}, {1}", guess[0], guess[1]);
+                Console.WriteLine("The ball landed on: {0}", randomNumber);
 
-                Console.WriteLine("Your bet was on number: {0}, which is in row: {1}", placementOfBet, guess);
-                Console.WriteLine("The ball landed on: {0}, which is in row: {1}", randomNumber, rowRandom);
-
-                if (guess == rowRandom)
+                if (isChecked)
                 {
                     winLose = true;
                 }
@@ -631,16 +631,17 @@ namespace Casion
         /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
         /// <param name="randomNumber">Roulettens Tal</param>
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
-        public int BetCorner(int bet, int placementOfBet, int randomNumber)
+        public int BetCorner(int bet, int placementOfBet, int secondPlacementBet, int randomNumber)
         {
             PayoutVariable = 8;
             if (IsNumberZero(randomNumber))
             {
-                int guess = 0;
-                int rowCount = 0;
-                int rowRandom = 0;
+                int[] guess = new int[4];
                 isChecked = false;
-                
+
+                int[] betRow1 = new int[] { placementOfBet, secondPlacementBet };
+                int[] betRow2 = new int[] { secondPlacementBet, placementOfBet };
+
                 List<Array> corners = new List<Array>();
                 #region Arrays
                 int[] firstCorner = new int[] { 1, 2, 4, 5 };
@@ -693,32 +694,33 @@ namespace Casion
 
 
                 //Leder efter det nummer man satsede på, og går igennem listen med de forskellige mulige corners, som indeholder hver deres sæt af tal
-                foreach (Array tableCorner in corners)
+                foreach (int[] tableRows in corners)
                 {
-                    foreach (int numberInCorner in tableCorner)
+                    if (tableRows[0] == betRow1[0] && tableRows[3] == betRow1[1] ||
+                        tableRows[0] == betRow2[0] && tableRows[3] == betRow2[1])
                     {
-                        if (placementOfBet == numberInCorner)
+                        guess[0] = tableRows[0];
+                        guess[1] = tableRows[1];
+                        guess[2] = tableRows[2];
+                        guess[3] = tableRows[3];
+                        foreach (int numberInRow in tableRows)
                         {
-                            guess = rowCount;
-                        }
-                        if (randomNumber == numberInCorner)
-                        {
-                            rowRandom = rowCount;
-                            isChecked = true;
+                            if (randomNumber == numberInRow)
+                            {
+                                isChecked = true;
+                            }
                         }
                     }
-
-                    rowCount++;
                     if (isChecked)
                     {
                         break;
                     }
                 }
 
-                Console.WriteLine("Your bet was on number: {0}, which is in row: {1}", placementOfBet, guess);
-                Console.WriteLine("The ball landed on: {0}, which is in row: {1}", randomNumber, rowRandom);
+                Console.WriteLine("Your bet was on number: {0}, {1}, {2}, {3}", guess[0], guess[1], guess[2], guess[3]);
+                Console.WriteLine("The ball landed on: {0}", randomNumber);
 
-                if (guess == rowRandom)
+                if (isChecked)
                 {
                     winLose = true;
                 }
@@ -771,14 +773,16 @@ namespace Casion
         /// <param name="placementOfBet">Hvilken tal, som spilleren har satset på</param>
         /// <param name="randomNumber">Roulettens Tal</param>
         /// <returns>En 'int', som er afhængig af funktionen 'BetCheck(bet, payoutVariable, winLose)'</returns>
-        public int BetLine(int bet, int placementOfBet, int randomNumber)
+        public int BetLine(int bet, int placementOfBet, int secondPlacementBet, int randomNumber)
         {
             PayoutVariable = 5;
             if (IsNumberZero(randomNumber))
             {
-                int guess = 0;
-                int rowCount = 0;
-                int rowRandom = 0;
+                int[] guess = new int[6];
+                isChecked = false;
+
+                int[] betRow1 = new int[] { placementOfBet, secondPlacementBet };
+                int[] betRow2 = new int[] { secondPlacementBet, placementOfBet };
 
                 List<Array> rows = new List<Array>();
                 #region Arrays
@@ -807,32 +811,36 @@ namespace Casion
                 rows.Add(tenthRow);
                 rows.Add(eleventhRow);
                 #endregion
-                isChecked = false;
-                foreach (Array tableRows in rows)
+
+                foreach (int[] tableRows in rows)
                 {
-                    foreach (int numberInRow in tableRows)
+                    if (tableRows[0] == betRow1[0] && tableRows[5] == betRow1[1] ||
+                        tableRows[0] == betRow2[0] && tableRows[5] == betRow2[1])
                     {
-                        if (placementOfBet == numberInRow)
+                        guess[0] = tableRows[0];
+                        guess[1] = tableRows[1];
+                        guess[2] = tableRows[2];
+                        guess[3] = tableRows[3];
+                        guess[4] = tableRows[4];
+                        guess[5] = tableRows[5];
+                        foreach (int numberInRow in tableRows)
                         {
-                            guess = rowCount;
-                        }
-                        if (randomNumber == numberInRow)
-                        {
-                            rowRandom = rowCount;
-                            isChecked = true;
+                            if (randomNumber == numberInRow)
+                            {
+                                isChecked = true;
+                            }
                         }
                     }
                     if (isChecked)
                     {
                         break;
                     }
-                    rowCount++;
                 }
 
-                Console.WriteLine("Your bet was on number: {0}, which is in row: {1}", placementOfBet, guess);
-                Console.WriteLine("The ball landed on: {0}, which is in row {1}", randomNumber, rowRandom);
+                Console.WriteLine("Your bet was on Line: {0}-{1}-{2}-{3}-{4}-{5}", guess[0], guess[1], guess[2], guess[3], guess[4], guess[5]);
+                Console.WriteLine("The ball landed on: {0}", randomNumber);
 
-                if (rowRandom == guess)
+                if (isChecked)
                 {
                     winLose = true;
                 }

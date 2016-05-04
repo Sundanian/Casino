@@ -137,24 +137,33 @@ namespace Casion
                     betting.BetColumn(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 case "7":
-                    Console.WriteLine("Enter the numbers you'll bet on.\nThe Numbers have to be linked to eachother!\n F.x. if you want to bet on '6-3', you enter \"3\" and press 'Enter'..\n Starting with the lowest number: ");
-                    betting.BetSplit(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                    Console.WriteLine("Enter the numbers you'll bet on.\nThe Numbers have to be linked to eachother!\n F.x. You can bet on 1-2, 2-3, 2-5 ect..\nPlease enter the first number:");
+                    int numb1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Then the second number: ");
+                    int numb2 = Convert.ToInt32(Console.ReadLine());
+                    betting.BetSplit(bet, numb1, numb2, roulette.Spin());
                     break;
                 case "8":
                     Console.WriteLine("Enter the street-number you'll bet on.\nYou can just 'enter' a number, which is in the line, that you want to bet on!\n..: ");
                     betting.BetStreet(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 case "9":
-                    Console.WriteLine("Enter the number you'll bet on.\nYou can just 'enter' the number in the top left corner, of the square you want to bet on!\n..: ");
-                    betting.BetCorner(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                    Console.WriteLine("Enter the numbers you'll bet on.\nThe Numbers have to make a square of 4 numbers!\n F.x. You can bet on 1-2-4-5, 2-3-5-6, 4-5-7-8 ect..\nPlease enter the upperleft number in the corner you want to bet on: ");
+                    int numb3 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Please enter the number from the lowest right in the corner you want to bet on");
+                    int numb4 = Convert.ToInt32(Console.ReadLine());
+                    betting.BetCorner(bet, numb3, numb4, roulette.Spin());
                     break;
                 case "10":
                     Console.WriteLine("Betting on the Five (0, 00, 1, 2, 3).\n");
                     betting.BetFive(bet, 1, roulette.Spin());
                     break;
                 case "11":
-                    Console.WriteLine("Enter the first number of the two lines, you want to bet on.\nYou can just 'enter' the number in the top left corner, of the lines you want to bet on!\n..: ");
-                    betting.BetLine(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
+                    Console.WriteLine("Enter the numbers you'll bet on.\nThe Numbers have to make a rectangle of 6 numbers!\n F.x. You can bet on 1-2-3-4-5-6, 10-11-12-13-14-15, ect..\nPlease enter the upperleft number in the rectangle you want to bet on: ");
+                    int numb5 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Please enter the number from the lowest right in the rectangle you want to bet on");
+                    int numb6 = Convert.ToInt32(Console.ReadLine());
+                    betting.BetLine(bet, numb5, numb6, roulette.Spin());
                     break;
                 default:
                     Console.WriteLine("I don't understand your input...");
