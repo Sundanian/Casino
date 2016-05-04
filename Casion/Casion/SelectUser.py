@@ -14,16 +14,27 @@ try:
 
     
     cur.execute("Select * from Player")
-    rows=cur.fetchall()
+    rows = cur.fetchall()
+    print ""
+    i = 0 #Number of rows
     for row in rows:
         print "Save ID", row[0]
         print "Save Name", row[1]
         print "Save Money", row[2]
+        print ""
+        i += 1
 
-    Console.WriteLine("Select a save file (Write the ID number)")
-    playerinput = Console.ReadLine()
+    while True:
+        Console.WriteLine("Select a save file (Write the ID number)")
+        playerinput = Console.ReadLine()
+        try:
+            if int(playerinput) < i+1 and int(playerinput) > 0:
+                break
+            else:
+                print "Please enter something valid"
+        except ValueError:
+            print "Please enter something valid"
 
-  
     with con: 
         cur.execute("Select * from Player where Id = " + playerinput)
     playersave = cur.fetchall()
