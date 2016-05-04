@@ -15,6 +15,7 @@ namespace Casion
         static Roulette roulette;
         static Betting betting;
         static bool existingPlayers;
+        static int balance = 0;
 
         static void Main(string[] args)
         {
@@ -49,7 +50,6 @@ namespace Casion
                     return;
                 }
 
-                Console.WriteLine("Your balance: " + player.Money);
                 Console.WriteLine("Enter your bet amount:");
                 int bet = Convert.ToInt32(Console.ReadLine());
                 if (bet <= player.Money)
@@ -82,7 +82,9 @@ namespace Casion
             DrawRouletteTable();
             Console.WriteLine("What bet will you make?");
             Console.WriteLine("1: Bet Straight Up\n2: Even/Odd\n3: Low/High\n4: Red/Black\n5: Dozen\n6: Column\n7: Split\n8: Street\n9: Corner\n10: Five\n11: Line");
-            switch (Console.ReadLine())
+            string input = Console.ReadLine();
+            DrawRouletteTable();
+            switch (input)
             {
                 case "1":
                     Console.WriteLine("Enter the number you'll bet on: ");
@@ -204,6 +206,7 @@ namespace Casion
                 {
                     Console.WriteLine("Enter 'n' for new game or 'l' to load an existing game");
                     string input = Console.ReadLine().ToUpper();
+                    DrawRouletteTable();
                     switch (input)
                     {
                         case "N":
@@ -264,9 +267,14 @@ namespace Casion
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.Clear();
 
+            if (player != null)
+            {
+                balance = player.Money;
+            }
+
             //Draws the roulette table
             Green("   -----------------------   \n");
-            Green("  /    CASINO ROULETTE    \\  \n");
+            Green("  /    CASINO ROULETTE    \\   Your balance: " + balance + "\n");
             Green(" /                         \\ \n");
             Green("|-----------|0  |   |00 | < |\n");
             Green("|1-18 |     |"); Red("1  "); Green("|"); Black("2  "); Green("|"); Red("3  "); Green("| < |\n");
