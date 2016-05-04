@@ -69,6 +69,7 @@ namespace Casion
         /// <param name="bet">The amount of money the user bets.</param>
         public static void BetThree(int bet)
         {
+            DrawRouletteTable();
             Console.WriteLine("What bet will you make?");
             Console.WriteLine("1: Bet Straight Up\n2: Even/Odd\n3: Low/High\n4: Red/Black\n5: Dozen\n6: Column\n7: Split\n8: Street\n9: Corner\n10: Five\n11: Line");
             switch (Console.ReadLine())
@@ -147,6 +148,7 @@ namespace Casion
                     Console.WriteLine("I don't understand your input...");
                     break;
             }
+            DrawRouletteTable();
         }
         /// <summary>
         /// Saves the player and ends the game.
