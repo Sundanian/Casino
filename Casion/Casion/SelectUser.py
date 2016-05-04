@@ -15,15 +15,23 @@ try:
     
     cur.execute("Select * from Player")
     rows=cur.fetchall()
+    print ""
+    i = 0 #Number of rows
     for row in rows:
         print "Save ID", row[0]
         print "Save Name", row[1]
         print "Save Money", row[2]
+        print ""
+        i += 1
 
-    Console.WriteLine("Select a save file (Write the ID number)")
-    playerinput = Console.ReadLine()
+    while True:
+        Console.WriteLine("Select a save file (Write the ID number)")
+        playerinput = Console.ReadLine()
+        if int(playerinput) > i:
+            print "Please select a existing user"
+        else:
+            break
 
-  
     with con: 
         cur.execute("Select * from Player where Id = " + playerinput)
     playersave = cur.fetchall()
