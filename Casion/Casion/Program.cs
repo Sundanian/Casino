@@ -111,7 +111,8 @@ namespace Casion
                             evenOrOddNumber = 1;
                             break;
                         default:
-                            break;
+                            Console.WriteLine("I don't understand your input...");
+                            return;
                     }
                     betting.BetEvenOrOdd(bet, evenOrOddNumber, roulette.Spin());
                     break;
@@ -132,7 +133,8 @@ namespace Casion
                             redorblacknumber = 2;
                             break;
                         default:
-                            break;
+                            Console.WriteLine("I don't understand your input...");
+                            return;
                     }
                     betting.BetRedOrBlack(bet, redorblacknumber, roulette.Spin());
                     break;
