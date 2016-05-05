@@ -108,7 +108,7 @@ namespace Casion
                     betting.BetEvenOrOdd(bet, evenOrOddNumber, roulette.Spin());
                     break;
                 case "3":
-                    Console.WriteLine("Enter 18 or below for 'Low', and 19 or higher for 'High': ");
+                    Console.WriteLine("Enter a number between 1 and 18 for 'Low', and between 19 and 38 for 'High': ");
                     betting.BetLowOrHigh(bet, Convert.ToInt32(Console.ReadLine()), roulette.Spin());
                     break;
                 case "4":
