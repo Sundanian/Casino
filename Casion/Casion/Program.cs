@@ -29,7 +29,7 @@ namespace Casion
             else
             {
                 SaveGame(player);
-                EndGame();
+                EndGame(true);
             }
         }
         /// <summary>
@@ -51,7 +51,17 @@ namespace Casion
                 }
 
                 Console.WriteLine("Enter your bet amount:");
-                int bet = Convert.ToInt32(Console.ReadLine());
+                int bet;
+                try
+                {
+                    bet = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Something went wrong. Most likely something invalid was entered.");
+                    EndGame(false);
+                    throw;
+                }
                 if (bet <= player.Money)
                 {
                     BetTree(bet);
@@ -69,7 +79,7 @@ namespace Casion
                 else
                 {
                     loop = false;
-                    EndGame();
+                    EndGame(true);
                 }
             } while (loop);
         }
@@ -174,11 +184,16 @@ namespace Casion
         /// <summary>
         /// Saves the player and ends the game.
         /// </summary>
-        public static void EndGame()
+        /// <param name="menu">If the line "You entered n or something not recognized." should be written.</param>
+        public static void EndGame(bool menu)
         {
-            Console.WriteLine("You entered n or something not recognized.");
+            if (menu)
+            {
+                Console.WriteLine("You entered n or something not recognized.");
+            }
             Console.WriteLine("Ending game...");
             Console.ReadKey();
+            Environment.Exit(0);
         }
         /// <summary>
         /// The important code that needs to run at startup.
