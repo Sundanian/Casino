@@ -51,24 +51,21 @@ namespace Casion
                 }
 
                 Console.WriteLine("Enter your bet amount:");
-                int bet;
                 try
                 {
-                    bet = Convert.ToInt32(Console.ReadLine());
+                    int bet = Convert.ToInt32(Console.ReadLine());
+                    if (bet <= player.Money)
+                    {
+                            BetTree(bet);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bet too high. Please make another.");
+                    }
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Something went wrong. Most likely something invalid was entered.");
-                    EndGame(false);
-                    throw;
-                }
-                if (bet <= player.Money)
-                {
-                    BetTree(bet);
-                }
-                else
-                {
-                    Console.WriteLine("Bet too high. Please make another.");
                 }
                 SaveGame(player);
                 Console.WriteLine("Do you want to bet again? (y/n)");
@@ -179,7 +176,6 @@ namespace Casion
                     Console.WriteLine("I don't understand your input...");
                     break;
             }
-            // DrawRouletteTable();
         }
         /// <summary>
         /// Saves the player and ends the game.
