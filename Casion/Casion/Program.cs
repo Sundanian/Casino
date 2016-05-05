@@ -186,6 +186,7 @@ namespace Casion
         /// <param name="menu">If the line "You entered n or something not recognized." should be written.</param>
         public static void EndGame()
         {
+            Console.WriteLine("You entered 'n' or something i didn't understand.");
             Console.WriteLine("Ending game...");
             Console.ReadKey();
             Environment.Exit(0);
