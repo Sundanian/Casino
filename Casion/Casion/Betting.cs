@@ -526,7 +526,8 @@ namespace Casion
                     winLose = false;
                     if (guess[0] == 0 && guess[1] == 0 || guess[0] == guess[1])
                     {
-                        Console.WriteLine("You bet on something invalid, and therefor lost. Dont be a fool ;)");
+                        Console.WriteLine("You bet on something invalid. Dont be a fool. Your bet is returned.");
+                        player.Money += bet;
                     }
                 }
                 return BetCheck(bet, PayoutVariable, winLose);
@@ -733,7 +734,8 @@ namespace Casion
                     winLose = false;
                     if (guess[0] == 0 && guess[3] == 0 || guess[0] == guess[3])
                     {
-                        Console.WriteLine("You bet on something invalid, and therefor lost. Dont be a fool ;)");
+                        Console.WriteLine("You bet on something invalid. Dont be a fool. Your bet is returned.");
+                        player.Money += bet;
                     }
                 }
                 return BetCheck(bet, PayoutVariable, winLose);
@@ -857,7 +859,8 @@ namespace Casion
                     winLose = false;
                     if (guess[0] == 0 && guess[5] == 0 || guess[0] == guess[5])
                     {
-                        Console.WriteLine("You bet on something invalid, and therefor lost. Dont be a fool ;)");
+                        Console.WriteLine("You bet on something invalid. Dont be a fool. Your bet is returned.");
+                        player.Money += bet;
                     }
                 }
                 return BetCheck(bet, PayoutVariable, winLose);
