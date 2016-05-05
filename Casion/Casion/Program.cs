@@ -16,6 +16,7 @@ namespace Casion
         static Betting betting;
         static bool existingPlayers;
         static int balance = 0;
+        static string name = "";
 
         static void Main(string[] args)
         {
@@ -29,7 +30,7 @@ namespace Casion
             else
             {
                 SaveGame(player);
-                EndGame(true);
+                EndGame();
             }
         }
         /// <summary>
@@ -76,7 +77,7 @@ namespace Casion
                 else
                 {
                     loop = false;
-                    EndGame(true);
+                    EndGame();
                 }
             } while (loop);
         }
@@ -181,12 +182,8 @@ namespace Casion
         /// Saves the player and ends the game.
         /// </summary>
         /// <param name="menu">If the line "You entered n or something not recognized." should be written.</param>
-        public static void EndGame(bool menu)
+        public static void EndGame()
         {
-            if (menu)
-            {
-                Console.WriteLine("You entered n or something not recognized.");
-            }
             Console.WriteLine("Ending game...");
             Console.ReadKey();
             Environment.Exit(0);
@@ -290,6 +287,7 @@ namespace Casion
             if (player != null)
             {
                 balance = player.Money;
+                name = player.Name;
             }
 
             //Draws the roulette table
@@ -309,7 +307,7 @@ namespace Casion
             Green("|-----|3rd  |"); Black("28 "); Green("|"); Black("29 "); Green("|"); Red("30 "); Green("| < |\n");
             Green("|19-36|12   |"); Black("31 "); Green("|"); Red("32 "); Green("|"); Black("33 "); Green("| < |\n");
             Green("|-----------|"); Red("34 "); Green("|"); Black("35 "); Green("|"); Red("36 "); Green("| < |\n");
-            Green("|             ^   ^   ^     |\n");
+            Green("|             ^   ^   ^     | " + name + "\n");
             Green(" \\                         /  Your balance: " + balance + "\n");
             Green("  \\      BY GRUPPE 4      /  \n");
             Green("   -----------------------   \n");
