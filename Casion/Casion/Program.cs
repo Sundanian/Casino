@@ -283,7 +283,7 @@ namespace Casion
 
             //Draws the roulette table
             Green("   -----------------------   \n");
-            Green("  /    CASINO ROULETTE    \\   Your balance: " + balance + "\n");
+            Green("  /    CASINO ROULETTE    \\  \n");
             Green(" /                         \\ \n");
             Green("|-----------|0  |   |00 | < |\n");
             Green("|1-18 |     |"); Red("1  "); Green("|"); Black("2  "); Green("|"); Red("3  "); Green("| < |\n");
@@ -299,7 +299,7 @@ namespace Casion
             Green("|19-36|12   |"); Black("31 "); Green("|"); Red("32 "); Green("|"); Black("33 "); Green("| < |\n");
             Green("|-----------|"); Red("34 "); Green("|"); Black("35 "); Green("|"); Red("36 "); Green("| < |\n");
             Green("|             ^   ^   ^     |\n");
-            Green(" \\                         / \n");
+            Green(" \\                         /  Your balance: " + balance + "\n");
             Green("  \\      BY GRUPPE 4      /  \n");
             Green("   -----------------------   \n");
         }
